@@ -1,170 +1,83 @@
 # Elastic RCA Workflow Definition
-# Elastic AgenticAI Workflow for Automated Root Cause Analysis
+# Automated Root Cause Analysis using a single rca_agent
 
-name: acmebank_rca_workflow
+name: elastic_rca_workflow
 version: 1.0.0
-description: Automated Root Cause Analysis for IT Incidents using AgenticAI
+description: Automated Root Cause Analysis — triggered manually or by Kibana alert
 
-# Input parameters
+# ── Inputs ────────────────────────────────────────────────────────────────────
+
 input:
   incident_id:
     type: string
-    description: Incident ID to analyze (e.g., INC0012345)
-    required: true
+    description: "Incident ID to analyze (e.g. INC0012345) — used for manual and Scenario 3 triggers"
+    required: false
+  app_id:
+    type: string
+    description: "Application ID (e.g. APP-9123) — used for alert-driven Scenario 2 trigger"
+    required: false
 
-# Workflow steps (agent execution sequence)
+# ── Steps ─────────────────────────────────────────────────────────────────────
+
 steps:
-  # Step 1: Data Retrieval
-  - id: retrieve_data
-    name: Data Retrieval
-    agent: data_retriever_agent
-    description: Query Elasticsearch for all incident-related data
-    input:
-      incident_id: ${workflow.input.incident_id}
-    output: incident_data
-    timeout: 120  # 2 minutes
-    retry:
-      max_attempts: 3
-      backoff: exponential
 
-  # Step 2: Temporal Correlation
-  - id: correlate
-    name: Temporal Correlation
-    agent: correlation_agent
-    description: Analyze temporal patterns and relationships
-    depends_on: retrieve_data
-    input:
-      incident_data: ${steps.retrieve_data.output.incident_data}
-    output: correlation_results
-    timeout: 60  # 1 minute
-    retry:
-      max_attempts: 2
-      backoff: exponential
+  # Step 1: AI Agent Analysis
+  - id: rca_analysis
+    name: "RCA Agent Analysis"
+    type: ai.agent
+    with:
+      agent_id: "rca_agent"
+      message: |
+        Analyze incident {{ inputs.incident_id }}{{ inputs.app_id }}.
+        Retrieve all available data, correlate events, identify root cause,
+        and generate a complete Post-Incident Review document.
+    timeout: 300s
 
-  # Step 3: Root Cause Analysis
-  - id: analyze_rca
-    name: RCA Generator
-    agent: rca_generator_agent
-    description: Generate 5 Whys analysis using LLM + RAG
-    depends_on: correlate
-    input:
-      incident_data: ${steps.retrieve_data.output.incident_data}
-      correlation: ${steps.correlate.output.correlation_results}
-    output: rca_analysis
-    timeout: 90  # 1.5 minutes
-    retry:
-      max_attempts: 2
-      backoff: exponential
+  # Step 2: Create ServiceNow Incident (via Pipedream)
+  - id: create_incident
+    name: "Create ServiceNow Incident"
+    type: http
+    with:
+      url: "{{ env.PIPEDREAM_WEBHOOK_URL }}"
+      method: POST
+      headers:
+        Content-Type: "application/json"
+      body:
+        action: "create_incident"
+        incident_id: "{{ inputs.incident_id }}"
+        app_id: "{{ inputs.app_id }}"
+        rca_summary: "{{ steps.rca_analysis.output }}"
+        automated: true
+    timeout: 30s
+    continue_on_error: true   # Don't block if ServiceNow is unavailable
 
-  # Step 4: PIR Document Generation
-  - id: generate_pir
-    name: PIR Generator
-    agent: pir_generator_agent
-    description: Create Post-Incident Review document
-    depends_on: analyze_rca
-    input:
-      incident_data: ${steps.retrieve_data.output.incident_data}
-      correlation: ${steps.correlate.output.correlation_results}
-      rca: ${steps.analyze_rca.output.rca_analysis}
-    output: pir_document
-    timeout: 60  # 1 minute
-    retry:
-      max_attempts: 2
-      backoff: exponential
+  # Step 3: Log to Knowledge Base
+  - id: log_to_kb
+    name: "Log to Knowledge Base"
+    type: elasticsearch.index
+    with:
+      index: "rca-knowledge"
+      document:
+        incident_id: "{{ inputs.incident_id }}"
+        app_id: "{{ inputs.app_id }}"
+        rca_completed: true
+        automated: true
+        timestamp: "{{ now() }}"
 
-# Workflow output
-output:
-  incident_id: ${workflow.input.incident_id}
-  incident_summary: ${steps.retrieve_data.output.incident_data.incident}
-  correlation_results: ${steps.correlate.output.correlation_results}
-  rca_analysis: ${steps.analyze_rca.output.rca_analysis}
-  pir_document: ${steps.generate_pir.output.pir_document}
-  execution_metadata:
-    start_time: ${workflow.start_time}
-    end_time: ${workflow.end_time}
-    duration_seconds: ${workflow.duration}
-    total_documents_analyzed: ${steps.retrieve_data.output.incident_data.metadata.total_documents}
+# ── Triggers ──────────────────────────────────────────────────────────────────
 
-# Error handling
-error_handler:
-  on_failure:
-    - log_error: true
-    - notify: ops_team
-    - save_state: true
+triggers:
+  # Manual trigger — Scenarios 1 and 3
+  manual:
+    enabled: true
+    inputs:
+      - incident_id
 
-# Monitoring
-monitoring:
-  metrics:
-    - execution_time
-    - agent_success_rate
-    - document_count
-    - llm_token_usage
-  alerts:
-    - execution_time > 300  # Alert if >5 minutes
-    - any_agent_failure
-
-# Agent definitions
-agents:
-  - name: data_retriever_agent
-    type: tool_based
-    description: Pure Elasticsearch query agent (no LLM)
-    tools:
-      - elasticsearch_query
-      - time_range_calculator
-      - multi_index_search
-    model: none
-
-  - name: correlation_agent
-    type: llm_with_tools
-    description: Temporal pattern analysis using LLM reasoning
-    llm:
-      provider: anthropic
-      model: claude-sonnet-4-20250514
-      temperature: 0.3
-      max_tokens: 2000
-    tools:
-      - temporal_analyzer
-      - statistical_analyzer
-      - pattern_matcher
-
-  - name: rca_generator_agent
-    type: llm_with_rag
-    description: Root cause analysis using 5 Whys + knowledge base
-    llm:
-      provider: anthropic
-      model: claude-sonnet-4-20250514
-      temperature: 0.5
-      max_tokens: 4000
-    tools:
-      - five_whys_analyzer
-      - rag_search
-      - evidence_linker
-    rag:
-      index: rca-knowledge
-      model: elser_v2
-      top_k: 3
-
-  - name: pir_generator_agent
-    type: llm_based
-    description: PIR document generation
-    llm:
-      provider: anthropic
-      model: claude-sonnet-4-20250514
-      temperature: 0.7
-      max_tokens: 4000
-    tools:
-      - document_formatter
-      - timeline_visualizer
-
-# Tags and metadata
-tags:
-  - rca
-  - incident_management
-  - automation
-  - acmebank
-
-metadata:
-  team: platform_engineering
-  owner: chintan.rami@elastic.co
-  demo_date: 2026-02-11
-  use_case: automated_rca
+  # Alert-driven trigger — Scenario 2
+  # Configure this in Kibana Alerting: Stack Management → Rules
+  # Rule: avg(heap_percent) > 85 over 5 minutes on index rca-metrics
+  alert:
+    enabled: true
+    source: "kibana_alerting"
+    inputs:
+      - app_id

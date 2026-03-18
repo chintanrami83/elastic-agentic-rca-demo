@@ -1,12 +1,12 @@
 # Quick Start Guide
 
-Get the demo running in your environment in 15 minutes.
+Get the demo running in 15 minutes.
 
 ---
 
 ## Prerequisites
 
-- Python 3.11 or 3.12
+- Python 3.11 or 3.12 (see [PYTHON313_FIX.md](PYTHON313_FIX.md) for 3.13)
 - Elastic Cloud deployment v9.2+ with ELSER model deployed
 - Git
 
@@ -20,7 +20,7 @@ cd elastic-agentic-rca-demo
 cp .env.example .env
 ```
 
-Edit `.env` and fill in your Elastic Cloud credentials:
+Edit `.env` with your Elastic Cloud credentials:
 
 ```
 ELASTIC_URL=https://your-cluster.es.your-region.gcp.elastic-cloud.com
@@ -37,7 +37,7 @@ KIBANA_URL=https://your-cluster.kb.your-region.gcp.elastic-cloud.com
 python3 -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r requirements-minimal.txt
 ```
 
 ---
@@ -48,14 +48,11 @@ pip install -r requirements.txt
 python scripts/utilities/test_connectivity.py
 ```
 
-Expected output:
+Expected:
 ```
 ✓ Connected to Elasticsearch 9.x.x
 ✓ ELSER model found
-✓ Kibana reachable
 ```
-
-If this fails, double-check your `.env` values and that your cluster is running.
 
 ---
 
@@ -65,18 +62,18 @@ If this fails, double-check your `.env` values and that your cluster is running.
 python scripts/utilities/setup_elasticsearch.py
 ```
 
-This creates all required indices:
+This creates all `rca-*` indices:
 ```
-✓ incidents-servicenow
-✓ changes-servicenow
-✓ logs-application
-✓ logs-infrastructure
-✓ traces-apm
-✓ comms-teams
-✓ comms-email
-✓ knowledge-base
-✓ rca-metrics
+✓ rca-incidents
+✓ rca-changes
 ✓ rca-alerts
+✓ rca-logs-app
+✓ rca-logs-infra
+✓ rca-metrics
+✓ rca-traces
+✓ rca-comms-teams
+✓ rca-comms-email
+✓ rca-knowledge
 ```
 
 ---
@@ -84,20 +81,15 @@ This creates all required indices:
 ## Step 5 — Ingest Demo Data
 
 ```bash
-# Ingest all 3 scenarios at once
 python scripts/data_ingestion/ingest_all_data.py
-
-# Or ingest individual scenarios
-python scripts/data_ingestion/ingest_scenario2_data.py
-python scripts/data_ingestion/ingest_scenario3_data.py
 ```
 
-Expected output:
+Expected:
 ```
-✓ Scenario 1: 156 documents indexed
-✓ Scenario 2: 180 documents indexed
-✓ Scenario 3: 228 documents indexed
-Total: 564 documents ingested
+✓ Scenario 1: 156 documents
+✓ Scenario 2: 180 documents
+✓ Scenario 3: 228 documents
+Total ingested: 564 documents
 ```
 
 ---
@@ -105,56 +97,57 @@ Total: 564 documents ingested
 ## Step 6 — Verify in Kibana
 
 1. Open Kibana → **Discover**
-2. Create a data view with index pattern `rca-*` and time field `@timestamp`
-3. Run these searches to confirm data loaded correctly:
+2. Create a data view:
+   - Index pattern: `rca-*`
+   - Time field: `@timestamp`
+3. Run these searches to confirm each scenario loaded:
 
-**Scenario 1 — DB Connection Pool:**
-```
-incident_id:"INC0012345"
-```
-Expected: ~156 documents
-
-**Scenario 2 — Memory Leak:**
-```
-incident_id:"INC0023456"
-```
-Expected: ~180 documents
-
-**Scenario 3 — Cascading Timeout:**
-```
-incident_id:"INC0034567"
-```
-Expected: ~228 documents
+| Search | Expected docs |
+|---|---|
+| `incident_id:"INC0012345"` | ~156 (Scenario 1) |
+| `incident_id:"INC0023456"` | ~180 (Scenario 2) |
+| `incident_id:"INC0034567"` | ~228 (Scenario 3) |
 
 ---
 
 ## Step 7 — Run the Demo
 
-### Scenario 2 — Live Alert-Driven RCA (recommended starting point)
+### Scenario 1 — Manual RCA
+In Kibana, open the Elastic Workflow for manual RCA and enter:
+```
+incident_id: INC0012345
+```
 
-Start the continuous memory leak data generator to trigger a real Kibana alert:
+### Scenario 2 — Alert-Driven RCA (Live)
+Start the continuous memory leak data generator:
 
 ```bash
 bash scripts/demo/start_generator.sh
 ```
 
-This streams live JVM heap metrics into Elasticsearch. Once heap exceeds 85%, your Kibana alert fires and the Elastic Workflow activates the `rca_agent` automatically.
+This streams live JVM heap metrics. When heap exceeds 85%, the Kibana alert fires and the Workflow triggers `rca_agent` automatically.
 
-Stop the generator when done:
+Stop when done:
 ```bash
 bash scripts/demo/stop_generator.sh
+```
+
+### Scenario 3 — Distributed System RCA
+In Kibana, open the Elastic Workflow for distributed RCA and enter:
+```
+incident_id: INC0034567
 ```
 
 ---
 
 ## Troubleshooting
 
-**`ModuleNotFoundError`** — virtual environment not activated:
+**`ModuleNotFoundError`** — activate the virtual environment:
 ```bash
 source venv/bin/activate
 ```
 
-**`ConnectionError`** — check `.env` credentials and that your cluster is reachable:
+**`ConnectionError`** — check `.env` values:
 ```bash
 python scripts/utilities/test_connectivity.py
 ```

@@ -1,268 +1,103 @@
-# Agent Configuration for Elastic Agentic RCA Demo
-# Defines behavior, capabilities, and settings for each agent
+# Agent Configuration — Elastic Agentic RCA Demo
+# Single rca_agent with 3 ES|QL tools, one per scenario type
 
-global:
-  timeout: 300  # seconds
-  max_retries: 3
-  retry_delay: 2  # seconds
-  concurrency: 5
-  enable_caching: true
-  cache_ttl: 3600  # seconds
+agent:
+  name: "rca_agent"
+  description: "Autonomous Root Cause Analysis agent — analyzes incidents across logs, metrics, traces, and communications"
+  llm:
+    provider: "anthropic"
+    model: "claude-sonnet-4-5"
+    temperature: 0.3
+    max_tokens: 4096
+  settings:
+    timeout: 300
+    max_iterations: 10
 
-agents:
-  orchestrator:
-    name: "Orchestrator Agent"
-    description: "Coordinates workflow and routes to specialized agents"
-    enabled: true
-    priority: 1
-    capabilities:
-      - workflow_coordination
-      - agent_routing
-      - result_aggregation
-      - error_handling
-    settings:
-      max_parallel_agents: 5
-      timeout: 600
-      enable_streaming: true
-    llm:
-      provider: "elastic_ml"  # or "claude", "openai"
-      model: "elser_v2"
-      temperature: 0.3
-      max_tokens: 2048
-    
-  tickets_changes:
-    name: "Tickets & Changes Agent"
-    description: "Queries ServiceNow for incidents, problems, and changes"
-    enabled: true
-    priority: 2
-    capabilities:
-      - servicenow_query
-      - change_correlation
-      - incident_history
-      - pattern_detection
-    settings:
-      lookback_days: 30
-      max_related_incidents: 20
-      max_related_changes: 10
-      correlation_window_hours: 24
-    llm:
-      provider: "elastic_ml"
-      model: "elser_v2"
-      temperature: 0.2
-      max_tokens: 2048
-    search:
-      indices:
-        - "incidents-servicenow"
-        - "changes-servicenow"
-        - "problems-servicenow"
-      default_size: 50
-      
-  comms:
-    name: "Communications Agent"
-    description: "Extracts context from Teams and Email"
-    enabled: true
-    priority: 2
-    capabilities:
-      - teams_analysis
-      - email_parsing
-      - timeline_extraction
-      - stakeholder_identification
-    settings:
-      lookback_hours: 72
-      max_messages: 100
-      extract_mentions: true
-      extract_links: true
-    llm:
-      provider: "claude"  # Better at conversational analysis
-      model: "claude-sonnet-4-20250514"
-      temperature: 0.4
-      max_tokens: 4096
-    search:
-      indices:
-        - "comms-teams"
-        - "comms-email"
-      default_size: 100
-      
-  observability:
-    name: "Observability Agent"
-    description: "Analyzes logs, metrics, and APM traces"
-    enabled: true
-    priority: 2
-    capabilities:
-      - log_analysis
-      - metric_correlation
-      - trace_analysis
-      - anomaly_detection
-      - error_pattern_matching
-    settings:
-      lookback_hours: 24
-      max_logs: 5000
-      max_traces: 1000
-      error_threshold: 10  # errors per minute
-      latency_threshold_ms: 5000
-    llm:
-      provider: "elastic_ml"
-      model: "elser_v2"
-      temperature: 0.2
-      max_tokens: 4096
-    search:
-      indices:
-        - "logs-infrastructure"
-        - "logs-application"
-        - "traces-apm-appdynamics"
-      default_size: 1000
-    analysis:
-      detect_spikes: true
-      spike_threshold: 3  # standard deviations
-      time_buckets: "5m"
-      
-  correlation_rca:
-    name: "Correlation & RCA Agent"
-    description: "Performs temporal correlation and RCA with 5 Whys"
-    enabled: true
-    priority: 3
-    capabilities:
-      - temporal_correlation
-      - pattern_matching
-      - five_whys_analysis
-      - rag_retrieval
-      - root_cause_determination
-    settings:
-      correlation_window_minutes: 30
-      confidence_threshold: 0.7
-      max_whys: 5
-      rag_top_k: 5
-    llm:
-      provider: "claude"  # Better at reasoning
-      model: "claude-sonnet-4-20250514"
-      temperature: 0.5
-      max_tokens: 8192
-    rag:
-      enabled: true
-      embedding_model: "elser_v2"
-      index: "docs-knowledge"
-      top_k: 5
-      min_score: 0.6
-    five_whys:
-      enabled: true
-      max_depth: 5
-      require_evidence: true
-      
-  pir_generator:
-    name: "PIR Generator Agent"
-    description: "Creates Post-Incident Review documents"
-    enabled: true
-    priority: 4
-    capabilities:
-      - document_generation
-      - template_filling
-      - evidence_compilation
-      - timeline_visualization
-    settings:
-      output_format: "docx"  # or "pdf"
-      include_graphs: true
-      include_code_snippets: true
-      include_log_excerpts: true
-    llm:
-      provider: "claude"  # Better at structured writing
-      model: "claude-sonnet-4-20250514"
-      temperature: 0.3
-      max_tokens: 8192
-    templates:
-      default: "config/templates/pir_template.docx"
-      styles:
-        - "Industry Standard"
-        - "Technical Deep Dive"
-        - "Executive Summary"
-        
-  reporting:
-    name: "Reporting Agent"
-    description: "Generates metrics and dashboard updates"
-    enabled: true
-    priority: 5
-    capabilities:
-      - metrics_collection
-      - dashboard_update
-      - trend_analysis
-      - alerting
-    settings:
-      update_interval: 60  # seconds
-      retention_days: 90
-      export_formats:
-        - "json"
-        - "csv"
-    metrics:
-      - incident_count
-      - mttr
-      - rca_accuracy
-      - agent_performance
-      - cost_savings
-    dashboards:
-      - "RCA Overview"
-      - "Agent Performance"
-      - "Incident Trends"
+# ── ES|QL Tools ───────────────────────────────────────────────────────────────
 
-workflows:
-  standard_rca:
-    name: "Standard RCA Workflow"
-    description: "Default workflow for incident analysis"
-    steps:
-      - agent: orchestrator
-        action: validate_incident
-        timeout: 10
-      - agent: tickets_changes
-        action: query_related_data
-        timeout: 30
-        parallel: true
-      - agent: comms
-        action: extract_communications
-        timeout: 30
-        parallel: true
-      - agent: observability
-        action: analyze_telemetry
-        timeout: 60
-        parallel: true
-      - agent: correlation_rca
-        action: correlate_and_analyze
-        timeout: 120
-        depends_on:
-          - tickets_changes
-          - comms
-          - observability
-      - agent: pir_generator
-        action: generate_document
-        timeout: 60
-        depends_on:
-          - correlation_rca
-      - agent: reporting
-        action: update_metrics
-        timeout: 30
-        depends_on:
-          - pir_generator
-          
-  quick_analysis:
-    name: "Quick Analysis"
-    description: "Fast analysis for P3/P4 incidents"
-    steps:
-      - agent: orchestrator
-        action: validate_incident
-      - agent: observability
-        action: analyze_telemetry
-      - agent: correlation_rca
-        action: quick_rca
-      - agent: reporting
-        action: update_metrics
+tools:
+  - name: "rca_inc_change_logs_infra_traces"
+    description: >
+      Retrieves all data for a given incident ID across incidents, changes,
+      application logs, infrastructure logs, APM traces, and communications.
+      Use for Scenario 1 (manual RCA — DB connection pool, deployment correlation).
+    type: esql
+    parameters:
+      - name: incident_id
+        type: string
+        required: true
+        description: "ServiceNow incident ID, e.g. INC0012345"
+    query: |
+      FROM rca-incidents, rca-changes, rca-logs-app, rca-logs-infra,
+           rca-traces, rca-comms-teams, rca-comms-email, rca-knowledge
+      | WHERE incident_id == ?incident_id
+        OR incident_ref == ?incident_id
+      | SORT @timestamp ASC
+      | LIMIT 500
 
-error_handling:
-  retry_on_failure: true
-  max_retries: 3
-  retry_delay: 5
-  fallback_to_manual: true
-  notification_on_failure: true
-  
-monitoring:
-  enable_logging: true
-  log_level: INFO
-  enable_metrics: true
-  enable_tracing: true
-  health_check_interval: 60
+  - name: "memory_leak_data_retriever"
+    description: >
+      Retrieves JVM metrics, GC logs, application logs, and alert data
+      for a given app. Use for Scenario 2 (alert-driven RCA — memory leak detection).
+    type: esql
+    parameters:
+      - name: app_id
+        type: string
+        required: true
+        description: "Application ID, e.g. APP-9123"
+    query: |
+      FROM rca-metrics, rca-logs-app, rca-logs-infra,
+           rca-changes, rca-alerts, rca-knowledge
+      | WHERE app_id == ?app_id
+        AND @timestamp >= NOW() - 24h
+      | SORT @timestamp ASC
+      | LIMIT 500
+
+  - name: "distributed_system_analyzer"
+    description: >
+      Retrieves data across multiple services for a distributed incident.
+      Includes metrics, logs, distributed traces, and communications.
+      Use for Scenario 3 (cascading timeout across microservices).
+    type: esql
+    parameters:
+      - name: incident_id
+        type: string
+        required: true
+        description: "Incident ID, e.g. INC0034567"
+    query: |
+      FROM rca-metrics, rca-logs-app, rca-traces,
+           rca-comms-teams, rca-incidents, rca-alerts, rca-knowledge
+      | WHERE incident_id == ?incident_id
+        OR app_id IN ("APP-9123", "APP-5521", "APP-7654")
+      | SORT @timestamp ASC
+      | LIMIT 500
+
+# ── Output Format ─────────────────────────────────────────────────────────────
+
+output_format:
+  type: "pir_document"
+  sections:
+    - "Executive Summary"
+    - "Incident Timeline"
+    - "Root Cause Analysis (5 Whys)"
+    - "Impact Assessment"
+    - "Preventive Measures"
+    - "Lessons Learned"
+
+# ── System Instructions ───────────────────────────────────────────────────────
+
+system_instructions: |
+  You are an expert Site Reliability Engineer performing automated Root Cause Analysis.
+
+  For every incident you receive:
+  1. Use the appropriate ES|QL tool to retrieve all relevant data
+  2. Correlate events temporally — look for changes or deployments before error spikes
+  3. For distributed failures, trace backwards from symptoms to root cause:
+     - Identify which service degraded first (earliest timestamp)
+     - Follow the dependency chain upstream
+     - Check for external API or third-party failures
+  4. Apply 5 Whys methodology to identify the true root cause
+  5. Generate a structured Post-Incident Review (PIR) document
+
+  Always base your analysis on evidence from the data. Cite specific timestamps,
+  error messages, and metric values. Do not speculate beyond what the data shows.

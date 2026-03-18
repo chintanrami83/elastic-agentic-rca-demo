@@ -1,25 +1,7 @@
-# Elastic Agentic RCA Demo - Minimal Requirements
-# Works with Python 3.11, 3.12, 3.13
-
-# Essential packages only
-python-dotenv
-pyyaml
-python-dateutil
-pytz
-
-# Elasticsearch
-elasticsearch
-
-# Data generation
-faker
-
-# CLI utilities
-rich
-click
-
-# API (if needed later)
-fastapi
-uvicorn
-
-# HTTP
-requests
+# Minimal install — core functionality only
+python-dotenv>=1.0.0
+pyyaml>=6.0
+elasticsearch>=8.12.0
+rich>=13.0.0
+requests>=2.31.0
+faker>=22.0.0

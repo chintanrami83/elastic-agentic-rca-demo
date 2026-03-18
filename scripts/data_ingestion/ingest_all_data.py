@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Ingest All Data - Elastic Agentic RCA Demo
-Loads synthetic data into Elasticsearch indices
+Loads synthetic data for all 3 scenarios into Elasticsearch
 """
 
 import sys
@@ -10,161 +10,137 @@ import json
 from pathlib import Path
 from elasticsearch.helpers import bulk
 
-# Add project root to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
 
 from scripts.utilities.es_client import get_es_client
 from rich.console import Console
-from rich.progress import Progress, track
 
 console = Console()
 
-# Data directory
 DATA_DIR = Path(__file__).parent.parent.parent / "data" / "synthetic"
-
-# Index mapping
-INDEX_MAPPING = {
-    "incidents": "rca-incidents",
-    "changes": "rca-changes",
-    "problems": "rca-problems",
-    "logs": "rca-logs-app",  # Application logs
-    "traces": "rca-traces",
-    "comms": {
-        "teams": "rca-comms-teams",
-        "emails": "rca-comms-email"
-    },
-    "knowledge": "rca-knowledge",
-    "code": "rca-code"
-}
 
 
 def load_json_file(filepath: Path) -> list:
-    """Load JSON file"""
     if not filepath.exists():
         return []
-    
     with open(filepath, 'r') as f:
-        return json.load(f)
+        data = json.load(f)
+        return data if isinstance(data, list) else [data]
 
 
-def bulk_index(es, index_name: str, documents: list):
-    """Bulk index documents"""
+def load_json_dir(dirpath: Path) -> list:
+    docs = []
+    if not dirpath.exists():
+        return docs
+    for f in dirpath.glob("*.json"):
+        with open(f, 'r') as fh:
+            data = json.load(fh)
+            if isinstance(data, list):
+                docs.extend(data)
+            else:
+                docs.append(data)
+    return docs
+
+
+def bulk_index(es, index_name: str, documents: list) -> int:
     if not documents:
         console.print(f"  [yellow]⊘[/yellow] No documents for {index_name}")
         return 0
-    
-    actions = [
-        {
-            "_index": index_name,
-            "_source": doc
-        }
-        for doc in documents
-    ]
-    
+    actions = [{"_index": index_name, "_source": doc} for doc in documents]
     success, failed = bulk(es, actions, raise_on_error=False)
-    console.print(f"  [green]✓[/green] Indexed {success} documents to {index_name}")
-    
+    console.print(f"  [green]✓[/green] {success} documents → {index_name}")
     if failed:
-        console.print(f"  [red]✗[/red] Failed: {failed}")
-    
+        console.print(f"  [red]✗[/red] {len(failed)} failed")
     return success
 
 
-def ingest_scenario(es, scenario_num: int):
-    """Ingest all data for a scenario"""
-    console.print(f"\n[bold]Ingesting Scenario {scenario_num}[/bold]")
-    
-    total_docs = 0
-    
-    # 1. Incidents
-    incidents = load_json_file(DATA_DIR / "incidents" / f"scenario{scenario_num}_incidents.json")
-    total_docs += bulk_index(es, INDEX_MAPPING["incidents"], incidents)
-    
-    # 2. Changes
-    changes = load_json_file(DATA_DIR / "changes" / f"scenario{scenario_num}_changes.json")
-    total_docs += bulk_index(es, INDEX_MAPPING["changes"], changes)
-    
-    # 3. Application Logs
-    logs_app = load_json_file(DATA_DIR / "logs" / f"scenario{scenario_num}_logs_app.json")
-    total_docs += bulk_index(es, INDEX_MAPPING["logs"], logs_app)
-    
-    # 4. Infrastructure Logs
-    logs_infra = load_json_file(DATA_DIR / "logs" / f"scenario{scenario_num}_logs_infra.json")
-    total_docs += bulk_index(es, "rca-logs-infra", logs_infra)
-    
-    # 5. Traces
-    traces = load_json_file(DATA_DIR / "traces" / f"scenario{scenario_num}_traces.json")
-    total_docs += bulk_index(es, INDEX_MAPPING["traces"], traces)
-    
-    # 6. Teams Messages
-    teams = load_json_file(DATA_DIR / "comms" / f"scenario{scenario_num}_teams.json")
-    total_docs += bulk_index(es, INDEX_MAPPING["comms"]["teams"], teams)
-    
-    # 7. Emails
-    emails = load_json_file(DATA_DIR / "comms" / f"scenario{scenario_num}_emails.json")
-    total_docs += bulk_index(es, INDEX_MAPPING["comms"]["emails"], emails)
-    
-    # 8. Knowledge Base
-    kb = load_json_file(DATA_DIR / "knowledge" / f"scenario{scenario_num}_kb.json")
-    total_docs += bulk_index(es, INDEX_MAPPING["knowledge"], kb)
-    
-    console.print(f"[green]✓ Scenario {scenario_num}: {total_docs} total documents[/green]")
-    return total_docs
+def ingest_scenario1(es) -> int:
+    console.print("\n[bold]Scenario 1 — DB Connection Pool Exhaustion[/bold]")
+    total = 0
+    base = DATA_DIR
+    total += bulk_index(es, "rca-incidents",    load_json_file(base / "incidents/scenario1_incidents.json"))
+    total += bulk_index(es, "rca-changes",      load_json_file(base / "changes/scenario1_changes.json"))
+    total += bulk_index(es, "rca-logs-app",     load_json_file(base / "logs/scenario1_logs_app.json"))
+    total += bulk_index(es, "rca-logs-infra",   load_json_file(base / "logs/scenario1_logs_infra.json"))
+    total += bulk_index(es, "rca-traces",       load_json_file(base / "traces/scenario1_traces.json"))
+    total += bulk_index(es, "rca-comms-teams",  load_json_file(base / "comms/scenario1_teams.json"))
+    total += bulk_index(es, "rca-comms-email",  load_json_file(base / "comms/scenario1_emails.json"))
+    total += bulk_index(es, "rca-knowledge",    load_json_file(base / "knowledge/scenario1_kb.json"))
+    console.print(f"[green]✓ Scenario 1: {total} documents[/green]")
+    return total
+
+
+def ingest_scenario2(es) -> int:
+    console.print("\n[bold]Scenario 2 — JVM Memory Leak[/bold]")
+    total = 0
+    base = DATA_DIR / "scenario2_memory_leak"
+    total += bulk_index(es, "rca-incidents",    load_json_dir(base / "incidents"))
+    total += bulk_index(es, "rca-changes",      load_json_dir(base / "changes"))
+    total += bulk_index(es, "rca-alerts",       load_json_dir(base / "alerts"))
+    total += bulk_index(es, "rca-logs-app",     load_json_dir(base / "logs/app"))
+    total += bulk_index(es, "rca-logs-infra",   load_json_dir(base / "logs/infra"))
+    total += bulk_index(es, "rca-metrics",      load_json_dir(base / "metrics"))
+    total += bulk_index(es, "rca-traces",       load_json_dir(base / "traces"))
+    total += bulk_index(es, "rca-comms-teams",  load_json_dir(base / "comms/teams"))
+    total += bulk_index(es, "rca-knowledge",    load_json_dir(base / "knowledge"))
+    console.print(f"[green]✓ Scenario 2: {total} documents[/green]")
+    return total
+
+
+def ingest_scenario3(es) -> int:
+    console.print("\n[bold]Scenario 3 — Cascading Timeout[/bold]")
+    total = 0
+    base = DATA_DIR / "scenario3_cascading_timeout"
+    total += bulk_index(es, "rca-incidents",    load_json_dir(base / "incidents"))
+    total += bulk_index(es, "rca-alerts",       load_json_dir(base / "alerts"))
+    total += bulk_index(es, "rca-logs-app",     load_json_dir(base / "logs/app"))
+    total += bulk_index(es, "rca-metrics",      load_json_dir(base / "metrics"))
+    total += bulk_index(es, "rca-traces",       load_json_dir(base / "traces"))
+    total += bulk_index(es, "rca-comms-teams",  load_json_dir(base / "comms/teams"))
+    total += bulk_index(es, "rca-knowledge",    load_json_dir(base / "knowledge"))
+    console.print(f"[green]✓ Scenario 3: {total} documents[/green]")
+    return total
 
 
 def main():
-    """Main ingestion function"""
-    
     console.print("\n[bold blue]═══════════════════════════════════════════[/bold blue]")
-    console.print("[bold blue]  Elastic Agentic RCA Demo - Data Ingestion        [/bold blue]")
-    console.print("[bold blue]═══════════════════════════════════════════[/bold blue]\n")
-    
+    console.print("[bold blue]  Elastic Agentic RCA Demo — Data Ingestion[/bold blue]")
+    console.print("[bold blue]═══════════════════════════════════════════[/bold blue]")
+
     try:
-        # Get Elasticsearch client
         es = get_es_client()
-        
-        # Check connection
         info = es.info()
-        console.print(f"[green]✓ Connected to Elasticsearch {info['version']['number']}[/green]")
-        console.print(f"[green]✓ Cluster: {info['cluster_name']}[/green]\n")
-        
-        # Ingest all scenarios
+        console.print(f"\n[green]✓ Connected to Elasticsearch {info['version']['number']}[/green]")
+        console.print(f"[green]✓ Cluster: {info['cluster_name']}[/green]")
+
         grand_total = 0
-        
-        # Scenario 1
-        grand_total += ingest_scenario(es, 1)
-        
-        # TODO: Add scenarios 2 and 3 when generated
-        
-        # Refresh indices
-        console.print("\n[bold]Refreshing indices...[/bold]")
+        grand_total += ingest_scenario1(es)
+        grand_total += ingest_scenario2(es)
+        grand_total += ingest_scenario3(es)
+
+        # Refresh all rca-* indices
         es.indices.refresh(index="rca-*")
-        console.print("[green]✓ Indices refreshed[/green]")
-        
-        # Show document counts
+
+        # Show final counts
         console.print("\n[bold]Document counts by index:[/bold]")
-        for index in ["rca-incidents", "rca-changes", "rca-logs-app", "rca-logs-infra",
-                      "rca-traces", "rca-comms-teams", "rca-comms-email", "rca-knowledge"]:
+        indices = ["rca-incidents", "rca-changes", "rca-alerts", "rca-logs-app",
+                   "rca-logs-infra", "rca-metrics", "rca-traces",
+                   "rca-comms-teams", "rca-comms-email", "rca-knowledge"]
+        for idx in indices:
             try:
-                count = es.count(index=index)['count']
-                console.print(f"  {index}: [cyan]{count:,}[/cyan] documents")
+                count = es.count(index=idx)['count']
+                if count > 0:
+                    console.print(f"  {idx}: [cyan]{count:,}[/cyan]")
             except:
-                console.print(f"  {index}: [yellow]0[/yellow] documents")
-        
+                pass
+
         console.print(f"\n[bold green]Total ingested: {grand_total:,} documents[/bold green]")
-        
-        console.print("\n[bold green]═══════════════════════════════════════════[/bold green]")
-        console.print("[bold green]  Data Ingestion Complete!                  [/bold green]")
-        console.print("[bold green]═══════════════════════════════════════════[/bold green]\n")
-        
-        console.print("[bold]Next steps:[/bold]")
-        console.print("  1. Verify data in Kibana:")
-        console.print("     ${KIBANA_URL}")
-        console.print("  2. Run demo scenario:")
-        console.print("     python agents/orchestrator/main.py --incident INC0012345\n")
-        
+        console.print("\n[bold]Next steps:[/bold]")
+        console.print("  1. Open Kibana → Discover")
+        console.print("  2. Create data view: index pattern [cyan]rca-*[/cyan], time field [cyan]@timestamp[/cyan]")
+        console.print("  3. Search [cyan]incident_id:\"INC0012345\"[/cyan] to verify Scenario 1\n")
         return True
-        
+
     except Exception as e:
         console.print(f"\n[bold red]✗ Ingestion failed:[/bold red] {e}\n")
         import traceback
