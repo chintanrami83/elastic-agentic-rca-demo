@@ -1,0 +1,254 @@
+[
+  {
+    "@timestamp": "2026-02-04T08:30:00+11:00",
+    "log_level": "WARN",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "Connection pool status check",
+    "cpu_percent": 93.96009222905987,
+    "memory_percent": 73.72050297264458
+  },
+  {
+    "@timestamp": "2026-02-04T08:34:00+11:00",
+    "log_level": "WARN",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "Connection pool status check",
+    "cpu_percent": 79.51179803633883,
+    "memory_percent": 81.40000553247852
+  },
+  {
+    "@timestamp": "2026-02-04T08:42:00+11:00",
+    "log_level": "WARN",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "High CPU utilization detected",
+    "cpu_percent": 83.97296391822906,
+    "memory_percent": 80.83463726932513
+  },
+  {
+    "@timestamp": "2026-02-04T08:46:00+11:00",
+    "log_level": "INFO",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "Database connection established",
+    "cpu_percent": 64.21043827399086,
+    "memory_percent": 73.49477858006496
+  },
+  {
+    "@timestamp": "2026-02-04T08:50:00+11:00",
+    "log_level": "WARN",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "Connection pool status check",
+    "cpu_percent": 71.57201907748792,
+    "memory_percent": 75.3809300119036
+  },
+  {
+    "@timestamp": "2026-02-04T08:55:00+11:00",
+    "log_level": "ERROR",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "High CPU utilization detected",
+    "cpu_percent": 70.13764480599677,
+    "memory_percent": 72.64500376814256
+  },
+  {
+    "@timestamp": "2026-02-04T09:00:00+11:00",
+    "log_level": "INFO",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "Database connection established",
+    "cpu_percent": 82.72738910568027,
+    "memory_percent": 83.22900093024067
+  },
+  {
+    "@timestamp": "2026-02-04T09:03:00+11:00",
+    "log_level": "INFO",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "Connection pool status check",
+    "cpu_percent": 66.05416594898541,
+    "memory_percent": 73.4200829110905
+  },
+  {
+    "@timestamp": "2026-02-04T09:11:00+11:00",
+    "log_level": "INFO",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "Connection pool status check",
+    "cpu_percent": 60.965268919471775,
+    "memory_percent": 81.0430796973142
+  },
+  {
+    "@timestamp": "2026-02-04T09:15:00+11:00",
+    "log_level": "WARN",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "Connection pool status check",
+    "cpu_percent": 90.24233359670646,
+    "memory_percent": 76.39595743439399
+  },
+  {
+    "@timestamp": "2026-02-04T09:23:00+11:00",
+    "log_level": "INFO",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "High CPU utilization detected",
+    "cpu_percent": 85.75392386443212,
+    "memory_percent": 81.27544947335774
+  },
+  {
+    "@timestamp": "2026-02-04T09:27:00+11:00",
+    "log_level": "INFO",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "High CPU utilization detected",
+    "cpu_percent": 94.59837150922525,
+    "memory_percent": 71.24508694071503
+  },
+  {
+    "@timestamp": "2026-02-04T09:35:00+11:00",
+    "log_level": "WARN",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "High CPU utilization detected",
+    "cpu_percent": 63.57059009910399,
+    "memory_percent": 80.34513928207154
+  },
+  {
+    "@timestamp": "2026-02-04T09:43:00+11:00",
+    "log_level": "ERROR",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "High CPU utilization detected",
+    "cpu_percent": 63.39575601059167,
+    "memory_percent": 71.49600019657082
+  },
+  {
+    "@timestamp": "2026-02-04T09:47:00+11:00",
+    "log_level": "ERROR",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "High CPU utilization detected",
+    "cpu_percent": 87.0309665910273,
+    "memory_percent": 75.71949509939721
+  },
+  {
+    "@timestamp": "2026-02-04T09:50:00+11:00",
+    "log_level": "ERROR",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "Memory usage at 75%",
+    "cpu_percent": 81.90545449629423,
+    "memory_percent": 72.28823595365681
+  },
+  {
+    "@timestamp": "2026-02-04T09:55:00+11:00",
+    "log_level": "WARN",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "High CPU utilization detected",
+    "cpu_percent": 90.09111986125279,
+    "memory_percent": 77.91894082814994
+  },
+  {
+    "@timestamp": "2026-02-04T09:58:00+11:00",
+    "log_level": "INFO",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "Database connection established",
+    "cpu_percent": 89.34448393986986,
+    "memory_percent": 82.10637511863423
+  },
+  {
+    "@timestamp": "2026-02-04T10:06:00+11:00",
+    "log_level": "INFO",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "High CPU utilization detected",
+    "cpu_percent": 62.68824456006958,
+    "memory_percent": 78.73734363232602
+  },
+  {
+    "@timestamp": "2026-02-04T10:10:00+11:00",
+    "log_level": "INFO",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "Database connection established",
+    "cpu_percent": 67.63628876625243,
+    "memory_percent": 77.70303113091447
+  },
+  {
+    "@timestamp": "2026-02-04T10:16:00+11:00",
+    "log_level": "ERROR",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "Memory usage at 75%",
+    "cpu_percent": 76.10225739450952,
+    "memory_percent": 73.74234950825027
+  },
+  {
+    "@timestamp": "2026-02-04T10:22:00+11:00",
+    "log_level": "WARN",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "High CPU utilization detected",
+    "cpu_percent": 76.36682279817978,
+    "memory_percent": 82.24494505188491
+  },
+  {
+    "@timestamp": "2026-02-04T10:26:00+11:00",
+    "log_level": "ERROR",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "Connection pool status check",
+    "cpu_percent": 90.15363638607867,
+    "memory_percent": 70.94308131026722
+  },
+  {
+    "@timestamp": "2026-02-04T10:32:00+11:00",
+    "log_level": "WARN",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "Database connection established",
+    "cpu_percent": 50.54867240471119,
+    "memory_percent": 76.76522782765328
+  },
+  {
+    "@timestamp": "2026-02-04T10:38:00+11:00",
+    "log_level": "INFO",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "High CPU utilization detected",
+    "cpu_percent": 55.28855710981866,
+    "memory_percent": 82.10104857700375
+  },
+  {
+    "@timestamp": "2026-02-04T10:44:00+11:00",
+    "log_level": "INFO",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "Database connection established",
+    "cpu_percent": 54.11961686583859,
+    "memory_percent": 82.30777836044129
+  },
+  {
+    "@timestamp": "2026-02-04T10:52:00+11:00",
+    "log_level": "WARN",
+    "app_id": "APP-2847",
+    "host": "db-prod-01",
+    "message": "Database connection established",
+    "cpu_percent": 57.18067927488525,
+    "memory_percent": 75.89102547477394
+  },
+  {
+    "@timestamp": "2026-02-04T10:59:00+11:00",
+    "log_level": "INFO",
+    "app_id": "APP-2847",
+    "host": "db-prod-02",
+    "message": "Database connection established",
+    "cpu_percent": 38.76523634629301,
+    "memory_percent": 73.73010231910683
+  }
+]

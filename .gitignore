@@ -1,0 +1,61 @@
+# =============================================================
+# elastic-agentic-rca-demo .gitignore
+# =============================================================
+
+# ── SECURITY: Never commit credentials ──────────────────────
+.env
+.env.local
+.env.*.local
+credentials-*.csv
+*api_key*
+*secret*
+*.pem
+*.key
+
+# ── Python ───────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.mypy_cache/
+.ruff_cache/
+
+# ── Virtual environments ─────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ── Logs & runtime state ─────────────────────────────────────
+logs/*.log
+*.log
+scripts/demo/generator.log
+scripts/demo/generator_state.json
+
+# ── Generated outputs (not committed) ────────────────────────
+outputs/pir_documents/*.docx
+outputs/reports/*.json
+data/processed/
+
+# NOTE: Synthetic data IS committed intentionally for demo reproducibility.
+# If you regenerate data locally, commit changes deliberately.
+
+# ── IDE & OS artifacts ────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+._*
+Thumbs.db
+
+# ── Test coverage ─────────────────────────────────────────────
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ── Notebooks ─────────────────────────────────────────────────
+notebooks/.ipynb_checkpoints/

@@ -1,0 +1,920 @@
+[
+  {
+    "@timestamp": "2026-02-03T14:00:00+00:00",
+    "trace_id": "corr-769438",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 881.01386224256,
+        "status": "success"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 681.01386224256,
+        "status": "success"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 381.0138622425599,
+        "status": "success"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 281.0138622425599,
+        "status": "success",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 881.01386224256,
+    "success": true,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T14:05:00+00:00",
+    "trace_id": "corr-296111",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 3026.018619567249,
+        "status": "success"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 2826.018619567249,
+        "status": "success"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 2526.018619567249,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 2426.018619567249,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 3026.018619567249,
+    "success": true,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T14:10:00+00:00",
+    "trace_id": "corr-421034",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 2220.6783935600906,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 2020.6783935600906,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 1720.6783935600906,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 1620.6783935600906,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 2220.6783935600906,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T14:15:00+00:00",
+    "trace_id": "corr-629502",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 4023.2906503023514,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 3823.2906503023514,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 3523.2906503023514,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 3423.2906503023514,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 4023.2906503023514,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T14:20:00+00:00",
+    "trace_id": "corr-508932",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 5249.870359962444,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 5049.870359962444,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 4749.870359962444,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 4649.870359962444,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 5249.870359962444,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T14:25:00+00:00",
+    "trace_id": "corr-402885",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 5116.808146924898,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 4916.808146924898,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 4616.808146924898,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 4516.808146924898,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 5116.808146924898,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T14:30:00+00:00",
+    "trace_id": "corr-153143",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 4516.847303677674,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 4316.847303677674,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 4016.8473036776736,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 3916.8473036776736,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 4516.847303677674,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T14:35:00+00:00",
+    "trace_id": "corr-435557",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 5136.053099953134,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 4936.053099953134,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 4636.053099953134,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 4536.053099953134,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 5136.053099953134,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T14:40:00+00:00",
+    "trace_id": "corr-734011",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 3916.2436686732094,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 3716.2436686732094,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 3416.2436686732094,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 3316.2436686732094,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 3916.2436686732094,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T14:45:00+00:00",
+    "trace_id": "corr-601456",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 4219.879656049023,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 4019.879656049023,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 3719.879656049023,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 3619.879656049023,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 4219.879656049023,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T14:50:00+00:00",
+    "trace_id": "corr-620723",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 4496.459950122726,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 4296.459950122726,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 3996.459950122726,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 3896.459950122726,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 4496.459950122726,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T14:55:00+00:00",
+    "trace_id": "corr-305589",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 3728.950619906518,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 3528.950619906518,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 3228.950619906518,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 3128.950619906518,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 3728.950619906518,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T15:00:00+00:00",
+    "trace_id": "corr-781479",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 4095.6924850340524,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 3895.6924850340524,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 3595.6924850340524,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 3495.6924850340524,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 4095.6924850340524,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T15:05:00+00:00",
+    "trace_id": "corr-827081",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 4004.2430794466854,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 3804.2430794466854,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 3504.2430794466854,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 3404.2430794466854,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 4004.2430794466854,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T15:10:00+00:00",
+    "trace_id": "corr-140095",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 4120.784564030535,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 3920.784564030535,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 3620.784564030535,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 3520.784564030535,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 4120.784564030535,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T15:15:00+00:00",
+    "trace_id": "corr-957564",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 4457.181581073095,
+        "status": "error"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 4257.181581073095,
+        "status": "error"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 3957.181581073095,
+        "status": "error"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 3857.181581073095,
+        "status": "error",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 4457.181581073095,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T15:20:00+00:00",
+    "trace_id": "corr-469371",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 4955.976657626885,
+        "status": "success"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 4755.976657626885,
+        "status": "success"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 4455.976657626885,
+        "status": "success"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 4355.976657626885,
+        "status": "success",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 4955.976657626885,
+    "success": false,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T15:25:00+00:00",
+    "trace_id": "corr-350474",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 3266.7143246729997,
+        "status": "success"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 3066.7143246729997,
+        "status": "success"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 2766.7143246729997,
+        "status": "success"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 2666.7143246729997,
+        "status": "success",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 3266.7143246729997,
+    "success": true,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T15:30:00+00:00",
+    "trace_id": "corr-396030",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 1659.032632831477,
+        "status": "success"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 1459.032632831477,
+        "status": "success"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 1159.032632831477,
+        "status": "success"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 1059.032632831477,
+        "status": "success",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 1659.032632831477,
+    "success": true,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T15:35:00+00:00",
+    "trace_id": "corr-491621",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 1146.636264772689,
+        "status": "success"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 946.636264772689,
+        "status": "success"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 646.636264772689,
+        "status": "success"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 546.636264772689,
+        "status": "success",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 1146.636264772689,
+    "success": true,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T15:40:00+00:00",
+    "trace_id": "corr-175287",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 1028.3730198807839,
+        "status": "success"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 828.373019880784,
+        "status": "success"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 528.373019880784,
+        "status": "success"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 428.373019880784,
+        "status": "success",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 1028.3730198807839,
+    "success": true,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T15:45:00+00:00",
+    "trace_id": "corr-265354",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 974.1369677172174,
+        "status": "success"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 774.1369677172174,
+        "status": "success"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 474.13696771721743,
+        "status": "success"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 374.13696771721743,
+        "status": "success",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 974.1369677172174,
+    "success": true,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T15:50:00+00:00",
+    "trace_id": "corr-139365",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 941.0548836847167,
+        "status": "success"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 741.0548836847167,
+        "status": "success"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 441.05488368471674,
+        "status": "success"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 341.05488368471674,
+        "status": "success",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 941.0548836847167,
+    "success": true,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T15:55:00+00:00",
+    "trace_id": "corr-762008",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 1055.295568311499,
+        "status": "success"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 855.295568311499,
+        "status": "success"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 555.295568311499,
+        "status": "success"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 455.295568311499,
+        "status": "success",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 1055.295568311499,
+    "success": true,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T16:00:00+00:00",
+    "trace_id": "corr-397469",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 873.5140337586787,
+        "status": "success"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 673.5140337586787,
+        "status": "success"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 373.5140337586787,
+        "status": "success"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 273.5140337586787,
+        "status": "success",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 873.5140337586787,
+    "success": true,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T16:05:00+00:00",
+    "trace_id": "corr-154420",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 841.8815808039537,
+        "status": "success"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 641.8815808039537,
+        "status": "success"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 341.8815808039538,
+        "status": "success"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 241.8815808039538,
+        "status": "success",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 841.8815808039537,
+    "success": true,
+    "environment": "production"
+  },
+  {
+    "@timestamp": "2026-02-03T16:10:00+00:00",
+    "trace_id": "corr-168570",
+    "service_chain": [
+      {
+        "service": "order-gateway",
+        "app_id": "APP-7654",
+        "duration_ms": 1160.579156438039,
+        "status": "success"
+      },
+      {
+        "service": "inventory-service",
+        "app_id": "APP-5521",
+        "duration_ms": 960.579156438039,
+        "status": "success"
+      },
+      {
+        "service": "payment-service",
+        "app_id": "APP-9123",
+        "duration_ms": 660.579156438039,
+        "status": "success"
+      },
+      {
+        "service": "stripe-api",
+        "app_id": "external",
+        "duration_ms": 560.579156438039,
+        "status": "success",
+        "external": true
+      }
+    ],
+    "total_duration_ms": 1160.579156438039,
+    "success": true,
+    "environment": "production"
+  }
+]

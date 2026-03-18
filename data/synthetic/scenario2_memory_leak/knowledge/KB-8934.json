@@ -1,0 +1,15 @@
+{
+  "kb_id": "KB-8934",
+  "title": "Troubleshooting Java Memory Leaks in Microservices",
+  "category": "performance",
+  "tags": [
+    "memory",
+    "jvm",
+    "performance",
+    "troubleshooting"
+  ],
+  "content": "\nCommon causes of memory leaks in Java applications:\n1. Unclosed resources (connections, streams, files)\n2. Static collections that grow unbounded\n3. Cache implementations without eviction policies\n4. Thread-local variables not cleared\n5. Listeners/callbacks not deregistered\n\nInvestigation steps:\n- Monitor heap usage trends over time\n- Analyze GC logs for increasing frequency\n- Take heap dumps and analyze with MAT/VisualVM\n- Review recent code changes for resource management\n- Check for unbounded caches or collections\n\nResolution strategies:\n- Implement proper cache eviction policies\n- Add memory limits to collections\n- Ensure resources are closed in finally blocks\n- Use weak references where appropriate\n- Add heap monitoring alerts\n        ",
+  "created_at": "2025-11-15T10:00:00+11:00",
+  "updated_at": "2026-01-20T14:30:00+11:00",
+  "author": "Platform Engineering Team"
+}

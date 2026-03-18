@@ -1,0 +1,50 @@
+[
+  {
+    "@timestamp": "2026-02-04T09:05:00+11:00",
+    "channel": "incident-customerportal",
+    "sender": "john.smith@westpac.com",
+    "message": "Seeing connection errors in CustomerPortal, investigating now",
+    "thread_id": "thread-001",
+    "incident_ref": "INC0012345"
+  },
+  {
+    "@timestamp": "2026-02-04T09:15:00+11:00",
+    "channel": "incident-customerportal",
+    "sender": "john.smith@westpac.com",
+    "message": "This correlates with this morning's deployment - v2.3.1 went live at 08:00",
+    "thread_id": "thread-001",
+    "incident_ref": "INC0012345"
+  },
+  {
+    "@timestamp": "2026-02-04T09:30:00+11:00",
+    "channel": "incident-customerportal",
+    "sender": "sarah.chen@westpac.com",
+    "message": "Checking database connection pool metrics now",
+    "thread_id": "thread-001",
+    "incident_ref": "INC0012345"
+  },
+  {
+    "@timestamp": "2026-02-04T10:00:00+11:00",
+    "channel": "incident-customerportal",
+    "sender": "sarah.chen@westpac.com",
+    "message": "Found it - new API calls not releasing connections properly. Pool maxed at 50, need ~150",
+    "thread_id": "thread-001",
+    "incident_ref": "INC0012345"
+  },
+  {
+    "@timestamp": "2026-02-04T10:20:00+11:00",
+    "channel": "incident-customerportal",
+    "sender": "john.smith@westpac.com",
+    "message": "Preparing emergency change to increase pool size",
+    "thread_id": "thread-001",
+    "incident_ref": "INC0012345"
+  },
+  {
+    "@timestamp": "2026-02-04T11:10:00+11:00",
+    "channel": "incident-customerportal",
+    "sender": "sarah.chen@westpac.com",
+    "message": "Resolved - increased pool size to 200 and restarted. Will create PIR this afternoon",
+    "thread_id": "thread-001",
+    "incident_ref": "INC0012345"
+  }
+]

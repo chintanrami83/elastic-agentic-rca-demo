@@ -1,0 +1,563 @@
+# Demo Scenarios Configuration
+# Defines the three RCA scenarios with precise timelines and data
+
+metadata:
+  demo_date: "2026-02-11"
+  demo_time: "14:00:00"
+  timezone: "Australia/Sydney"
+  data_window_days: 7
+  base_date: "2026-02-04"
+
+scenarios:
+  scenario_1:
+    id: "scenario_1"
+    name: "Database Connection Pool Exhaustion"
+    description: "CustomerPortal API experiencing 500 errors due to connection pool exhaustion after deployment"
+    severity: "P1"
+    application:
+      app_id: "APP-2847"
+      name: "CustomerPortal-API"
+      team: "Digital Platform"
+      oncall: "john.smith@westpac.com"
+    
+    incident:
+      incident_id: "INC0012345"
+      created_at: "2026-02-08T02:40:00+11:00"
+      created_by: "john.smith@westpac.com"
+      description: "CustomerPortal API returning 500 errors - connection pool exhausted"
+      affected_ci: "CustomerPortal-API-PROD"
+      status: "Resolved"
+      resolved_at: "2026-02-08T04:15:00+11:00"
+      resolution_time_minutes: 95
+      impact: "High"
+      urgency: "High"
+      
+    root_cause:
+      summary: "Deployment v2.3.1 introduced new API endpoints that increased database connection requirements from 50 to ~150 concurrent connections, but the connection pool max size was not updated from default 50"
+      five_whys:
+        - question: "Why did the API return 500 errors?"
+          answer: "Database connection pool was exhausted"
+        - question: "Why was the connection pool exhausted?"
+          answer: "Maximum connections (50) were all in use"
+        - question: "Why were all connections in use?"
+          answer: "New API endpoints in v2.3.1 created more database queries per request"
+        - question: "Why wasn't the connection pool size increased?"
+          answer: "Connection pool configuration was not reviewed as part of deployment checklist"
+        - question: "Why wasn't it in the deployment checklist?"
+          answer: "Checklist didn't include database connection capacity review for API changes"
+      
+    timeline:
+      - timestamp: "2026-02-08T01:45:00+11:00"
+        event_type: "change"
+        source: "servicenow"
+        description: "CHG0089234 - Deployment of v2.3.1 (traffic optimization features)"
+        data:
+          change_id: "CHG0089234"
+          change_type: "Standard"
+          implemented_by: "deploy-automation"
+          
+      - timestamp: "2026-02-08T02:15:00+11:00"
+        event_type: "error"
+        source: "logs-application"
+        description: "First connection pool exhaustion error"
+        data:
+          log_level: "ERROR"
+          message: "java.sql.SQLException: Cannot get connection, pool exhausted"
+          error_count: 1
+          
+      - timestamp: "2026-02-08T02:18:00+11:00"
+        event_type: "alert"
+        source: "appdynamics"
+        description: "Database connection time increased 300%"
+        data:
+          metric: "db_connection_time"
+          baseline_ms: 50
+          current_ms: 200
+          
+      - timestamp: "2026-02-08T02:22:00+11:00"
+        event_type: "alert"
+        source: "logs-infrastructure"
+        description: "Database server CPU spike"
+        data:
+          host: "db-prod-01"
+          cpu_percent: 90
+          
+      - timestamp: "2026-02-08T02:30:00+11:00"
+        event_type: "alert"
+        source: "monitoring"
+        description: "Error rate threshold exceeded"
+        data:
+          error_rate_per_min: 45
+          threshold: 10
+          
+      - timestamp: "2026-02-08T02:35:00+11:00"
+        event_type: "email"
+        source: "email"
+        description: "Alert notification sent to on-call"
+        data:
+          from: "monitoring@westpac.com"
+          to: "oncall-platform@westpac.com"
+          subject: "CRITICAL: CustomerPortal API error rate exceeded"
+          
+      - timestamp: "2026-02-08T02:40:00+11:00"
+        event_type: "incident"
+        source: "servicenow"
+        description: "Incident created"
+        data:
+          incident_id: "INC0012345"
+          created_by: "john.smith@westpac.com"
+          
+      - timestamp: "2026-02-08T02:42:00+11:00"
+        event_type: "chat"
+        source: "teams"
+        description: "Initial investigation message"
+        data:
+          channel: "incident-customerportal"
+          sender: "john.smith@westpac.com"
+          message: "Seeing connection errors in CustomerPortal, investigating now"
+          
+      - timestamp: "2026-02-08T02:55:00+11:00"
+        event_type: "chat"
+        source: "teams"
+        description: "Correlation identified"
+        data:
+          sender: "john.smith@westpac.com"
+          message: "This correlates with tonight's deployment - v2.3.1 went live at 01:45"
+          
+      - timestamp: "2026-02-08T03:10:00+11:00"
+        event_type: "email"
+        source: "email"
+        description: "Escalation to DBA team"
+        data:
+          from: "john.smith@westpac.com"
+          to: "dba-team@westpac.com"
+          subject: "Urgent: Connection pool issues on CustomerPortal DB"
+          
+      - timestamp: "2026-02-08T03:15:00+11:00"
+        event_type: "log_analysis"
+        source: "logs-application"
+        description: "Error pattern confirmed"
+        data:
+          total_connection_errors: 2847
+          time_window: "02:15-03:15"
+          
+      - timestamp: "2026-02-08T03:30:00+11:00"
+        event_type: "chat"
+        source: "teams"
+        description: "Root cause identified"
+        data:
+          sender: "sarah.chen@westpac.com"
+          message: "Found it - new API calls not releasing connections properly. Pool maxed at 50, need ~150"
+          
+      - timestamp: "2026-02-08T03:35:00+11:00"
+        event_type: "kb_access"
+        source: "knowledge"
+        description: "KB article accessed"
+        data:
+          kb_id: "KB-4783"
+          title: "Database Connection Pool Tuning Guide"
+          
+      - timestamp: "2026-02-08T03:50:00+11:00"
+        event_type: "change"
+        source: "servicenow"
+        description: "Emergency configuration change"
+        data:
+          change_id: "CHG0089235"
+          description: "Update connection pool max size to 200"
+          
+      - timestamp: "2026-02-08T04:05:00+11:00"
+        event_type: "recovery"
+        source: "logs-application"
+        description: "Errors ceased, connection pool stabilized"
+        data:
+          error_count: 0
+          pool_utilization_percent: 45
+          
+      - timestamp: "2026-02-08T04:15:00+11:00"
+        event_type: "incident"
+        source: "servicenow"
+        description: "Incident resolved"
+        data:
+          incident_id: "INC0012345"
+          status: "Resolved"
+          
+    data_generation:
+      logs:
+        infrastructure: 850
+        application: 1200
+      traces: 450
+      teams_messages: 18
+      emails: 8
+      kb_articles:
+        - "KB-4783: Database Connection Pool Tuning Guide"
+        - "KB-2198: API Performance Best Practices"
+        
+  scenario_2:
+    id: "scenario_2"
+    name: "Memory Leak in Payment Service"
+    description: "PaymentService experiencing OutOfMemoryError after feature release"
+    severity: "P2"
+    application:
+      app_id: "APP-1923"
+      name: "PaymentService-Core"
+      team: "Payments Platform"
+      oncall: "sarah.chen@westpac.com"
+    
+    incident:
+      incident_id: "INC0012346"
+      created_at: "2026-02-09T15:10:00+11:00"
+      created_by: "sarah.chen@westpac.com"
+      description: "PaymentService pods restarting due to OutOfMemoryError"
+      affected_ci: "PaymentService-Core-PROD"
+      status: "Resolved"
+      resolved_at: "2026-02-09T18:00:00+11:00"
+      resolution_time_minutes: 170
+      impact: "Medium"
+      urgency: "High"
+      
+    root_cause:
+      summary: "New PaymentMethodCache class in v4.7.0 lacked proper eviction policy, causing unbounded cache growth and memory exhaustion"
+      five_whys:
+        - question: "Why did the service crash with OutOfMemoryError?"
+          answer: "JVM heap memory was exhausted"
+        - question: "Why was heap memory exhausted?"
+          answer: "PaymentMethodCache was consuming increasing memory over time"
+        - question: "Why was the cache growing unbounded?"
+          answer: "Cache eviction policy was not implemented"
+        - question: "Why wasn't eviction implemented?"
+          answer: "Developer assumed Spring's default caching would handle it automatically"
+        - question: "Why wasn't this caught in testing?"
+          answer: "Performance tests ran for only 30 minutes; leak took 2+ hours to manifest"
+          
+    timeline:
+      - timestamp: "2026-02-09T10:00:00+11:00"
+        event_type: "change"
+        source: "servicenow"
+        description: "Feature release v4.7.0"
+        data:
+          change_id: "CHG0089245"
+          description: "Release v4.7.0 - New payment methods support"
+          
+      - timestamp: "2026-02-09T11:30:00+11:00"
+        event_type: "metric"
+        source: "appdynamics"
+        description: "Heap memory usage trending upward"
+        data:
+          heap_percent: 60
+          trend: "increasing"
+          
+      - timestamp: "2026-02-09T13:15:00+11:00"
+        event_type: "metric"
+        source: "appdynamics"
+        description: "Heap at 85%, GC frequency increasing"
+        data:
+          heap_percent: 85
+          gc_count_per_min: 45
+          
+      - timestamp: "2026-02-09T14:00:00+11:00"
+        event_type: "error"
+        source: "logs-application"
+        description: "First OutOfMemoryError"
+        data:
+          log_level: "ERROR"
+          message: "java.lang.OutOfMemoryError: Java heap space"
+          
+      - timestamp: "2026-02-09T14:05:00+11:00"
+        event_type: "alert"
+        source: "kubernetes"
+        description: "Pod restarted automatically"
+        data:
+          pod: "paymentservice-pod-3"
+          restart_reason: "OOMKilled"
+          
+      - timestamp: "2026-02-09T14:18:00+11:00"
+        event_type: "error"
+        source: "logs-application"
+        description: "Memory climbing again after restart"
+        data:
+          heap_percent: 45
+          time_since_restart_min: 13
+          
+      - timestamp: "2026-02-09T14:25:00+11:00"
+        event_type: "email"
+        source: "email"
+        description: "SRE alerted about pod restarts"
+        data:
+          from: "k8s-monitoring@westpac.com"
+          to: "sre-team@westpac.com"
+          subject: "Multiple pod restarts: PaymentService-Core"
+          
+      - timestamp: "2026-02-09T15:10:00+11:00"
+        event_type: "incident"
+        source: "servicenow"
+        description: "Incident created"
+        data:
+          incident_id: "INC0012346"
+          
+      - timestamp: "2026-02-09T15:15:00+11:00"
+        event_type: "chat"
+        source: "teams"
+        description: "Investigation started"
+        data:
+          channel: "incident-payment"
+          sender: "sarah.chen@westpac.com"
+          message: "PaymentService keeps OOMing after this morning's release. Heap dump captured."
+          
+      - timestamp: "2026-02-09T15:30:00+11:00"
+        event_type: "chat"
+        source: "teams"
+        description: "Heap dump analysis"
+        data:
+          sender: "marcus.liu@westpac.com"
+          message: "Heap dump shows PaymentMethodCache consuming 2.1GB. Objects not being evicted."
+          
+      - timestamp: "2026-02-09T15:45:00+11:00"
+        event_type: "email"
+        source: "email"
+        description: "Heap analysis shared with dev team"
+        data:
+          from: "marcus.liu@westpac.com"
+          to: "dev-payments@westpac.com"
+          subject: "Heap dump analysis - PaymentMethodCache leak"
+          
+      - timestamp: "2026-02-09T16:00:00+11:00"
+        event_type: "code_review"
+        source: "github"
+        description: "PR review identified issue"
+        data:
+          pr_number: 2847
+          file: "PaymentMethodCache.java"
+          finding: "No TTL or size limit configured"
+          
+      - timestamp: "2026-02-09T16:20:00+11:00"
+        event_type: "chat"
+        source: "teams"
+        description: "Root cause confirmed"
+        data:
+          sender: "dev-lead@westpac.com"
+          message: "Confirmed - cache eviction not working. Objects accumulating indefinitely."
+          
+      - timestamp: "2026-02-09T16:30:00+11:00"
+        event_type: "kb_access"
+        source: "knowledge"
+        description: "KB article referenced"
+        data:
+          kb_id: "KB-3291"
+          title: "Memory Leak Detection and Resolution Patterns"
+          
+      - timestamp: "2026-02-09T17:00:00+11:00"
+        event_type: "change"
+        source: "servicenow"
+        description: "Rollback to v4.6.2"
+        data:
+          change_id: "CHG0089246"
+          description: "Emergency rollback from v4.7.0 to v4.6.2"
+          
+      - timestamp: "2026-02-09T17:30:00+11:00"
+        event_type: "recovery"
+        source: "appdynamics"
+        description: "Memory stabilized after rollback"
+        data:
+          heap_percent: 35
+          stable: true
+          
+      - timestamp: "2026-02-09T18:00:00+11:00"
+        event_type: "incident"
+        source: "servicenow"
+        description: "Incident resolved"
+        data:
+          incident_id: "INC0012346"
+          status: "Resolved"
+          
+    data_generation:
+      logs:
+        infrastructure: 600
+        application: 900
+      traces: 380
+      teams_messages: 22
+      emails: 6
+      kb_articles:
+        - "KB-3291: Memory Leak Detection Patterns"
+        - "KB-5672: JVM Heap Tuning Guide"
+        
+  scenario_3:
+    id: "scenario_3"
+    name: "API Gateway Timeout Chain"
+    description: "API Gateway experiencing cascading timeouts due to missing database index"
+    severity: "P2"
+    application:
+      app_id: "APP-3621"
+      name: "API-Gateway"
+      team: "API Platform"
+      oncall: "marcus.liu@westpac.com"
+    
+    incident:
+      incident_id: "INC0012347"
+      created_at: "2026-02-10T20:20:00+11:00"
+      created_by: "marcus.liu@westpac.com"
+      description: "API Gateway timeout errors - 15% failure rate"
+      affected_ci: "API-Gateway-PROD"
+      status: "Resolved"
+      resolved_at: "2026-02-10T21:30:00+11:00"
+      resolution_time_minutes: 70
+      impact: "Medium"
+      urgency: "High"
+      
+    root_cause:
+      summary: "Schema migration on Feb 9 dropped and recreated account_transactions table but failed to recreate index on account_id column, causing table scans under load"
+      five_whys:
+        - question: "Why did the API Gateway time out?"
+          answer: "Backend AccountService was taking 8+ seconds to respond"
+        - question: "Why was AccountService slow?"
+          answer: "Database queries were taking 12 seconds instead of 50ms"
+        - question: "Why were database queries slow?"
+          answer: "Full table scans on account_transactions table (2M+ rows)"
+        - question: "Why were full table scans happening?"
+          answer: "Index on account_id column was missing"
+        - question: "Why was the index missing?"
+          answer: "Migration script dropped and recreated table but didn't recreate all indexes"
+          
+    timeline:
+      - timestamp: "2026-02-10T20:00:00+11:00"
+        event_type: "traffic"
+        source: "monitoring"
+        description: "Traffic spike"
+        data:
+          requests_per_min: 8500
+          normal_baseline: 2500
+          
+      - timestamp: "2026-02-10T20:08:00+11:00"
+        event_type: "metric"
+        source: "appdynamics"
+        description: "Backend service latency increase"
+        data:
+          service: "AccountService"
+          latency_ms: 8000
+          baseline_ms: 200
+          
+      - timestamp: "2026-02-10T20:10:00+11:00"
+        event_type: "error"
+        source: "logs-application"
+        description: "Gateway timeout errors starting"
+        data:
+          error_rate_percent: 15
+          timeout_threshold_ms: 5000
+          
+      - timestamp: "2026-02-10T20:12:00+11:00"
+        event_type: "alert"
+        source: "monitoring"
+        description: "Error rate threshold breached"
+        data:
+          current_error_rate: 15
+          threshold: 5
+          
+      - timestamp: "2026-02-10T20:15:00+11:00"
+        event_type: "alert"
+        source: "logs-application"
+        description: "Circuit breaker tripped"
+        data:
+          service: "AccountService"
+          circuit_state: "OPEN"
+          
+      - timestamp: "2026-02-10T20:20:00+11:00"
+        event_type: "incident"
+        source: "servicenow"
+        description: "Incident created"
+        data:
+          incident_id: "INC0012347"
+          
+      - timestamp: "2026-02-10T20:22:00+11:00"
+        event_type: "chat"
+        source: "teams"
+        description: "Initial investigation"
+        data:
+          sender: "marcus.liu@westpac.com"
+          message: "Gateway timing out - checking downstream services"
+          
+      - timestamp: "2026-02-10T20:35:00+11:00"
+        event_type: "trace"
+        source: "appdynamics"
+        description: "Slow query identified"
+        data:
+          query: "SELECT * FROM account_transactions WHERE account_id = ?"
+          duration_ms: 12000
+          normal_duration_ms: 50
+          
+      - timestamp: "2026-02-10T20:40:00+11:00"
+        event_type: "email"
+        source: "email"
+        description: "DBA team engaged"
+        data:
+          from: "marcus.liu@westpac.com"
+          to: "dba-team@westpac.com"
+          subject: "Urgent: AccountService DB queries extremely slow"
+          
+      - timestamp: "2026-02-10T20:50:00+11:00"
+        event_type: "chat"
+        source: "teams"
+        description: "Index missing identified"
+        data:
+          sender: "dba-lead@westpac.com"
+          message: "Missing index on account_transactions.account_id - recent migration didn't recreate it"
+          
+      - timestamp: "2026-02-10T20:55:00+11:00"
+        event_type: "change_correlation"
+        source: "servicenow"
+        description: "Related change found"
+        data:
+          change_id: "CHG0089267"
+          date: "2026-02-09T22:00:00+11:00"
+          description: "Schema migration - account_transactions table update"
+          
+      - timestamp: "2026-02-10T21:00:00+11:00"
+        event_type: "kb_access"
+        source: "knowledge"
+        description: "KB article accessed"
+        data:
+          kb_id: "KB-5192"
+          title: "Database Performance Troubleshooting Guide"
+          
+      - timestamp: "2026-02-10T21:15:00+11:00"
+        event_type: "change"
+        source: "servicenow"
+        description: "Index created"
+        data:
+          change_id: "CHG0089268"
+          description: "Recreate missing index on account_transactions.account_id"
+          sql: "CREATE INDEX idx_account_id ON account_transactions(account_id)"
+          
+      - timestamp: "2026-02-10T21:20:00+11:00"
+        event_type: "recovery"
+        source: "appdynamics"
+        description: "Query performance restored"
+        data:
+          query_duration_ms: 45
+          improvement_percent: 99.6
+          
+      - timestamp: "2026-02-10T21:30:00+11:00"
+        event_type: "incident"
+        source: "servicenow"
+        description: "Incident resolved"
+        data:
+          incident_id: "INC0012347"
+          status: "Resolved"
+          
+    data_generation:
+      logs:
+        infrastructure: 720
+        application: 980
+      traces: 520
+      teams_messages: 16
+      emails: 5
+      kb_articles:
+        - "KB-5192: Database Performance Troubleshooting"
+        - "KB-7834: Migration Best Practices"
+
+generation_settings:
+  randomization:
+    add_noise: true
+    noise_percent: 5
+  realistic_patterns:
+    human_delay_seconds: [30, 600]  # 30s to 10min
+    investigation_steps: [3, 8]
+    escalation_probability: 0.6

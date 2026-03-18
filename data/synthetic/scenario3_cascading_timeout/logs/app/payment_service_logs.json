@@ -1,0 +1,102 @@
+[
+  {
+    "@timestamp": "2026-02-03T14:03:00+00:00",
+    "app_id": "APP-9123",
+    "app_name": "Payment Service",
+    "level": "WARN",
+    "message": "Stripe API response time increased to 2500ms",
+    "host": "payment-api-prod-02",
+    "environment": "production",
+    "logger": "com.westpac.payment.gateway.StripeClient"
+  },
+  {
+    "@timestamp": "2026-02-03T14:05:00+00:00",
+    "app_id": "APP-9123",
+    "app_name": "Payment Service",
+    "level": "WARN",
+    "message": "Stripe API response time: 3200ms (threshold: 1000ms)",
+    "host": "payment-api-prod-02",
+    "environment": "production",
+    "logger": "com.westpac.payment.gateway.StripeClient"
+  },
+  {
+    "@timestamp": "2026-02-03T14:10:00+00:00",
+    "app_id": "APP-9123",
+    "app_name": "Payment Service",
+    "level": "ERROR",
+    "message": "Stripe API timeout after 5000ms - order payment failed",
+    "host": "payment-api-prod-02",
+    "environment": "production",
+    "logger": "com.westpac.payment.gateway.StripeClient"
+  },
+  {
+    "@timestamp": "2026-02-03T14:15:00+00:00",
+    "app_id": "APP-9123",
+    "app_name": "Payment Service",
+    "level": "ERROR",
+    "message": "High rate of Stripe API timeouts detected: 15%",
+    "host": "payment-api-prod-02",
+    "environment": "production",
+    "logger": "com.westpac.payment.gateway.StripeClient"
+  },
+  {
+    "@timestamp": "2026-02-03T14:20:00+00:00",
+    "app_id": "APP-9123",
+    "app_name": "Payment Service",
+    "level": "CRITICAL",
+    "message": "Stripe API degraded - timeout rate: 25%",
+    "host": "payment-api-prod-02",
+    "environment": "production",
+    "logger": "com.westpac.payment.gateway.StripeClient"
+  },
+  {
+    "@timestamp": "2026-02-03T14:45:00+00:00",
+    "app_id": "APP-9123",
+    "app_name": "Payment Service",
+    "level": "ERROR",
+    "message": "Stripe payment gateway responding slowly (4800ms avg)",
+    "host": "payment-api-prod-02",
+    "environment": "production",
+    "logger": "com.westpac.payment.gateway.StripeClient"
+  },
+  {
+    "@timestamp": "2026-02-03T15:00:00+00:00",
+    "app_id": "APP-9123",
+    "app_name": "Payment Service",
+    "level": "CRITICAL",
+    "message": "External dependency failure - Stripe API",
+    "host": "payment-api-prod-02",
+    "environment": "production",
+    "logger": "com.westpac.payment.gateway.StripeClient"
+  },
+  {
+    "@timestamp": "2026-02-03T15:20:00+00:00",
+    "app_id": "APP-9123",
+    "app_name": "Payment Service",
+    "level": "INFO",
+    "message": "Switched to backup payment gateway (Adyen)",
+    "host": "payment-api-prod-02",
+    "environment": "production",
+    "logger": "com.westpac.payment.gateway.StripeClient"
+  },
+  {
+    "@timestamp": "2026-02-03T15:25:00+00:00",
+    "app_id": "APP-9123",
+    "app_name": "Payment Service",
+    "level": "INFO",
+    "message": "Payment processing stabilizing on backup gateway",
+    "host": "payment-api-prod-02",
+    "environment": "production",
+    "logger": "com.westpac.payment.gateway.StripeClient"
+  },
+  {
+    "@timestamp": "2026-02-03T15:35:00+00:00",
+    "app_id": "APP-9123",
+    "app_name": "Payment Service",
+    "level": "INFO",
+    "message": "Stripe API recovered - switching back to primary",
+    "host": "payment-api-prod-02",
+    "environment": "production",
+    "logger": "com.westpac.payment.gateway.StripeClient"
+  }
+]

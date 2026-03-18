@@ -1,0 +1,42 @@
+{
+  "interval_seconds": 60,
+  "heap_start_percent": 70.0,
+  "heap_increase_per_cycle": 2.5,
+  "heap_max_percent": 95.0,
+  "alert_threshold": 85.0,
+  "reset_after_max": true,
+  "add_random_noise": true,
+  "noise_range": 1.5,
+  
+  "_comments": {
+    "interval_seconds": "Time between metric generations (60 = 1 minute)",
+    "heap_start_percent": "Starting heap percentage (70% is normal)",
+    "heap_increase_per_cycle": "How much heap increases each cycle (2.5% = gradual leak)",
+    "heap_max_percent": "Maximum heap before reset (95% = near OOM)",
+    "alert_threshold": "Alert fires above this (85% matches alert rule)",
+    "reset_after_max": "Simulate service restart when max reached (true = realistic)",
+    "add_random_noise": "Add realistic fluctuations (true = more realistic)",
+    "noise_range": "Random fluctuation range in percent (+/- 1.5%)"
+  },
+  
+  "_demo_scenarios": {
+    "quick_demo": {
+      "interval_seconds": 30,
+      "heap_start_percent": 78.0,
+      "heap_increase_per_cycle": 3.0,
+      "comment": "Triggers alert in 2-3 minutes"
+    },
+    "slow_burn": {
+      "interval_seconds": 60,
+      "heap_start_percent": 70.0,
+      "heap_increase_per_cycle": 1.5,
+      "comment": "Triggers alert in 10 minutes"
+    },
+    "immediate_critical": {
+      "interval_seconds": 60,
+      "heap_start_percent": 88.0,
+      "heap_increase_per_cycle": 1.0,
+      "comment": "Already critical, fires immediately"
+    }
+  }
+}

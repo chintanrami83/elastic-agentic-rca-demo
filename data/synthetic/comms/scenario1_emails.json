@@ -1,0 +1,18 @@
+[
+  {
+    "@timestamp": "2026-02-04T08:35:00+11:00",
+    "from": "monitoring@westpac.com",
+    "to": "oncall-platform@westpac.com",
+    "subject": "CRITICAL: CustomerPortal API error rate exceeded",
+    "body": "Error rate: 45/min at 08:30 AEDT. Immediate attention required.",
+    "incident_ref": "INC0012345"
+  },
+  {
+    "@timestamp": "2026-02-04T09:45:00+11:00",
+    "from": "john.smith@westpac.com",
+    "to": "dba-team@westpac.com",
+    "subject": "Urgent: Connection pool issues on CustomerPortal DB",
+    "body": "Seeing connection pool exhaustion. Need DBA team assistance.",
+    "incident_ref": "INC0012345"
+  }
+]

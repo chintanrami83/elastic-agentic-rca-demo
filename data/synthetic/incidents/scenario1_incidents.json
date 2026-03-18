@@ -1,0 +1,17 @@
+[
+  {
+    "incident_id": "INC0012345",
+    "app_id": "APP-2847",
+    "severity": "P1",
+    "created_at": "2026-02-04T09:00:00+11:00",
+    "created_by": "john.smith@westpac.com",
+    "description": "CustomerPortal API returning 500 errors - connection pool exhausted",
+    "affected_ci": "CustomerPortal-API-PROD",
+    "status": "Resolved",
+    "resolved_at": "2026-02-04T11:00:00+11:00",
+    "resolution_time_minutes": 120,
+    "impact": "High",
+    "urgency": "High",
+    "category": "Availability"
+  }
+]

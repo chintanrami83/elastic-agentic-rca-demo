@@ -1,0 +1,47 @@
+[
+  {
+    "@timestamp": "2026-02-03T16:00:00+00:00",
+    "kb_id": "KB-CASCADE-001",
+    "title": "Troubleshooting Cascading Timeouts in Distributed Systems",
+    "category": "distributed-systems",
+    "tags": [
+      "timeout",
+      "cascading-failure",
+      "distributed-tracing",
+      "dependencies"
+    ],
+    "summary": "Guide for diagnosing cascading timeout failures across microservices",
+    "symptoms": [
+      "Downstream services showing high error rates",
+      "HTTP 504 Gateway Timeout errors",
+      "Service response times exceeding timeout thresholds",
+      "Error propagation across service boundaries"
+    ],
+    "diagnosis_steps": [
+      "Check distributed traces to identify slowest service in chain",
+      "Look for timeout errors in application logs",
+      "Verify external dependency health (payment gateways, APIs)",
+      "Trace request path backwards from error to origin",
+      "Check for recent changes in upstream services"
+    ],
+    "common_causes": [
+      "External API degradation or outages",
+      "Database connection pool exhaustion",
+      "Network latency spikes",
+      "Upstream service deployment issues",
+      "Resource contention (CPU, memory, threads)"
+    ],
+    "resolution_patterns": [
+      "Switch to backup service/gateway if available",
+      "Increase timeout thresholds temporarily",
+      "Enable circuit breakers to prevent cascading failures",
+      "Scale affected services horizontally",
+      "Implement retry logic with exponential backoff"
+    ],
+    "related_incidents": [
+      "INC0034567"
+    ],
+    "created_by": "platform-engineering",
+    "last_updated": "2026-02-04T14:00:00+00:00"
+  }
+]

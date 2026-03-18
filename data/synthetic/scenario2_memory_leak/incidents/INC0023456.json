@@ -1,0 +1,20 @@
+{
+  "incident_id": "INC0023456",
+  "app_id": "APP-9123",
+  "app_name": "PaymentService API",
+  "title": "PaymentService API - Memory Leak - JVM Heap Exhaustion",
+  "description": "Automated alert detected critical JVM heap usage (>85%). Progressive memory growth since v3.1.0 deployment at 08:00. System experiencing OOM errors and severe performance degradation.",
+  "severity": "P1",
+  "status": "resolved",
+  "created_at": "2026-02-04T12:30:00",
+  "created_by": "alert-automation",
+  "resolved_at": "2026-02-04T13:15:00",
+  "resolved_by": "platform-team",
+  "incident_type": "performance",
+  "root_cause_category": "memory_leak",
+  "impacted_users": "~8000",
+  "business_impact": "Payment processing delays, transaction failures",
+  "related_change": "CHG0098765",
+  "alert_triggered": true,
+  "automated_rca": true
+}

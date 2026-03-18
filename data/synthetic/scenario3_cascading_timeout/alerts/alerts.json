@@ -1,0 +1,27 @@
+[
+  {
+    "@timestamp": "2026-02-03T14:15:00+00:00",
+    "alert_id": "ALT-TIMEOUT-001",
+    "alert_name": "High Error Rate - OrderProcessing Gateway",
+    "app_id": "APP-7654",
+    "alert_timestamp": "2026-02-03T14:15:00+00:00",
+    "threshold_value": 45.0,
+    "threshold_config": 10.0,
+    "alert_status": "fired",
+    "severity": "critical",
+    "incident_created": "yes",
+    "incident_ref": "INC0034567"
+  },
+  {
+    "@timestamp": "2026-02-03T15:35:00+00:00",
+    "alert_id": "ALT-TIMEOUT-001",
+    "alert_name": "High Error Rate - OrderProcessing Gateway",
+    "app_id": "APP-7654",
+    "alert_timestamp": "2026-02-03T15:35:00+00:00",
+    "threshold_value": 3.2,
+    "threshold_config": 10.0,
+    "alert_status": "resolved",
+    "severity": "info",
+    "incident_ref": "INC0034567"
+  }
+]

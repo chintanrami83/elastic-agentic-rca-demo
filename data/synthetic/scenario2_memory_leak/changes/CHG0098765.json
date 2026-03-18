@@ -1,0 +1,29 @@
+{
+  "change_id": "CHG0098765",
+  "app_id": "APP-9123",
+  "app_name": "PaymentService API",
+  "change_type": "deployment",
+  "version_from": "v3.0.4",
+  "version_to": "v3.1.0",
+  "implemented_at": "2026-02-04T08:00:00",
+  "implemented_by": "deployment-pipeline",
+  "approval_status": "approved",
+  "risk_level": "medium",
+  "description": "Deploy v3.1.0 with new caching implementation for customer session data",
+  "change_details": {
+    "components_changed": [
+      "SessionCacheManager",
+      "PaymentContextCache",
+      "UserPreferencesCache"
+    ],
+    "files_modified": 23,
+    "lines_added": 456,
+    "lines_removed": 123
+  },
+  "rollback_plan": "Automated rollback to v3.0.4 via deployment pipeline",
+  "testing_completed": true,
+  "load_test_passed": true,
+  "deployment_method": "blue-green",
+  "environment": "production",
+  "region": "ap-southeast-2"
+}

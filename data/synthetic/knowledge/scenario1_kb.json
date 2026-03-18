@@ -1,0 +1,16 @@
+[
+  {
+    "kb_id": "KB-4783",
+    "title": "Database Connection Pool Tuning Guide",
+    "content": "# Database Connection Pool Tuning\n\n## Overview\nProper connection pool sizing is critical for application performance.\n\n## Sizing Guidelines\n- Base size: 10 connections per application instance\n- Max size: (concurrent users / response time) * safety factor\n- Typical range: 50-200 connections\n\n## Common Issues\n- Pool exhaustion: Increase max size\n- Connection leaks: Check code for proper connection release\n- Timeout errors: Increase connection timeout\n\n## Monitoring\nMonitor pool metrics:\n- Active connections\n- Idle connections\n- Wait time\n- Rejection rate\n\n## Resolution Steps\n1. Identify connection leak or sizing issue\n2. Adjust pool configuration\n3. Deploy change\n4. Monitor metrics\n5. Document in PIR\n",
+    "tags": [
+      "database",
+      "performance",
+      "connection-pool"
+    ],
+    "category": "Infrastructure",
+    "last_updated": "2025-11-06T00:00:00+11:00",
+    "view_count": 245,
+    "helpful_count": 198
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "@timestamp": "2026-02-03T14:15:00+00:00",
+    "incident_id": "INC0034567",
+    "app_id": "APP-7654",
+    "app_name": "OrderProcessing Gateway",
+    "title": "High Order Failure Rate - OrderProcessing Gateway",
+    "description": "Customer orders failing with 45% error rate. Order gateway showing HTTP 504 timeouts.",
+    "severity": "P1",
+    "status": "resolved",
+    "detected_at": "2026-02-03T14:15:00+00:00",
+    "resolved_at": "2026-02-03T15:35:00+00:00",
+    "duration_minutes": 80,
+    "reported_by": "monitoring-system",
+    "assigned_to": "platform-engineering",
+    "root_cause_summary": "External payment gateway (Stripe) degradation caused cascading timeouts through inventory-service to order-gateway",
+    "resolution": "Switched to backup payment gateway (Adyen) while Stripe recovered",
+    "customer_impact": "High - 45% order failure rate for 70 minutes",
+    "services_affected": [
+      "order-gateway",
+      "inventory-service",
+      "payment-service"
+    ]
+  }
+]

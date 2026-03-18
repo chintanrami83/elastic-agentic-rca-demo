@@ -1,0 +1,44 @@
+[
+  {
+    "@timestamp": "2026-02-03T14:15:00+00:00",
+    "channel": "platform-alerts",
+    "author": "AlertBot",
+    "message": "\ud83d\udea8 ALERT: High error rate on OrderProcessing Gateway (APP-7654) - 45% failure rate",
+    "app_id": "APP-7654",
+    "channel_type": "teams",
+    "incident_ref": "INC0034567"
+  },
+  {
+    "@timestamp": "2026-02-03T14:20:00+00:00",
+    "channel": "platform-oncall",
+    "author": "Sarah Chen",
+    "message": "Looking at order-gateway logs - seeing lots of 504 timeouts from inventory-service",
+    "app_id": "APP-7654",
+    "channel_type": "teams"
+  },
+  {
+    "@timestamp": "2026-02-03T14:45:00+00:00",
+    "channel": "platform-oncall",
+    "author": "Mike Rodriguez",
+    "message": "Checked inventory-service - it's timing out on payment-service calls. Root cause might be upstream",
+    "app_id": "APP-5521",
+    "channel_type": "teams"
+  },
+  {
+    "@timestamp": "2026-02-03T15:15:00+00:00",
+    "channel": "platform-oncall",
+    "author": "Sarah Chen",
+    "message": "FOUND IT! Payment-service is slow because Stripe API is degraded. Switching to Adyen backup gateway.",
+    "app_id": "APP-9123",
+    "channel_type": "teams"
+  },
+  {
+    "@timestamp": "2026-02-03T15:30:00+00:00",
+    "channel": "platform-alerts",
+    "author": "AlertBot",
+    "message": "\u2705 RESOLVED: Order processing gateway error rate back to normal",
+    "app_id": "APP-7654",
+    "channel_type": "teams",
+    "incident_ref": "INC0034567"
+  }
+]

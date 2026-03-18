@@ -1,0 +1,102 @@
+[
+  {
+    "@timestamp": "2026-02-03T14:08:00+00:00",
+    "app_id": "APP-7654",
+    "app_name": "OrderProcessing Gateway",
+    "level": "WARN",
+    "message": "Order processing slowing - inventory-service delays",
+    "host": "order-gateway-prod-03",
+    "environment": "production",
+    "logger": "com.westpac.order.gateway.OrderController"
+  },
+  {
+    "@timestamp": "2026-02-03T14:10:00+00:00",
+    "app_id": "APP-7654",
+    "app_name": "OrderProcessing Gateway",
+    "level": "ERROR",
+    "message": "Order creation failed - inventory-service timeout",
+    "host": "order-gateway-prod-03",
+    "environment": "production",
+    "logger": "com.westpac.order.gateway.OrderController"
+  },
+  {
+    "@timestamp": "2026-02-03T14:12:00+00:00",
+    "app_id": "APP-7654",
+    "app_name": "OrderProcessing Gateway",
+    "level": "ERROR",
+    "message": "HTTP 504 Gateway Timeout from inventory-service",
+    "host": "order-gateway-prod-03",
+    "environment": "production",
+    "logger": "com.westpac.order.gateway.OrderController"
+  },
+  {
+    "@timestamp": "2026-02-03T14:15:00+00:00",
+    "app_id": "APP-7654",
+    "app_name": "OrderProcessing Gateway",
+    "level": "CRITICAL",
+    "message": "Order failure rate spiking - 45% failed",
+    "host": "order-gateway-prod-03",
+    "environment": "production",
+    "logger": "com.westpac.order.gateway.OrderController"
+  },
+  {
+    "@timestamp": "2026-02-03T14:20:00+00:00",
+    "app_id": "APP-7654",
+    "app_name": "OrderProcessing Gateway",
+    "level": "CRITICAL",
+    "message": "Customer impact - orders failing due to downstream timeouts",
+    "host": "order-gateway-prod-03",
+    "environment": "production",
+    "logger": "com.westpac.order.gateway.OrderController"
+  },
+  {
+    "@timestamp": "2026-02-03T14:30:00+00:00",
+    "app_id": "APP-7654",
+    "app_name": "OrderProcessing Gateway",
+    "level": "ERROR",
+    "message": "Cascading timeout - inventory-service \u2192 payment-service",
+    "host": "order-gateway-prod-03",
+    "environment": "production",
+    "logger": "com.westpac.order.gateway.OrderController"
+  },
+  {
+    "@timestamp": "2026-02-03T14:45:00+00:00",
+    "app_id": "APP-7654",
+    "app_name": "OrderProcessing Gateway",
+    "level": "CRITICAL",
+    "message": "Critical: 50% order failure rate",
+    "host": "order-gateway-prod-03",
+    "environment": "production",
+    "logger": "com.westpac.order.gateway.OrderController"
+  },
+  {
+    "@timestamp": "2026-02-03T15:00:00+00:00",
+    "app_id": "APP-7654",
+    "app_name": "OrderProcessing Gateway",
+    "level": "ERROR",
+    "message": "Multiple downstream service failures detected",
+    "host": "order-gateway-prod-03",
+    "environment": "production",
+    "logger": "com.westpac.order.gateway.OrderController"
+  },
+  {
+    "@timestamp": "2026-02-03T15:20:00+00:00",
+    "app_id": "APP-7654",
+    "app_name": "OrderProcessing Gateway",
+    "level": "INFO",
+    "message": "Downstream services recovering",
+    "host": "order-gateway-prod-03",
+    "environment": "production",
+    "logger": "com.westpac.order.gateway.OrderController"
+  },
+  {
+    "@timestamp": "2026-02-03T15:35:00+00:00",
+    "app_id": "APP-7654",
+    "app_name": "OrderProcessing Gateway",
+    "level": "INFO",
+    "message": "Order processing normalized",
+    "host": "order-gateway-prod-03",
+    "environment": "production",
+    "logger": "com.westpac.order.gateway.OrderController"
+  }
+]

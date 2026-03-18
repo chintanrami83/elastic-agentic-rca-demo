@@ -1,0 +1,7 @@
+{
+  "timestamp": "2026-02-04T11:00:00",
+  "channel": "payments-support",
+  "author": "Sarah Chen",
+  "message": "Anyone else seeing slow responses from PaymentService API? Customers reporting delays.",
+  "incident_ref": null
+}

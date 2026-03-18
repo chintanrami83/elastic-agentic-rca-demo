@@ -1,0 +1,11 @@
+{
+  "alert_id": "ALERT-MEM-001",
+  "alert_name": "JVM Heap Memory Critical",
+  "app_id": "APP-9123",
+  "alert_timestamp": "2026-02-04T13:15:00",
+  "threshold_value": 42.1,
+  "threshold_config": 85.0,
+  "alert_status": "resolved",
+  "severity": "critical",
+  "incident_ref": "INC0023456"
+}

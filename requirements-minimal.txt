@@ -1,0 +1,25 @@
+# Westpac RCA Demo - Minimal Requirements
+# Works with Python 3.11, 3.12, 3.13
+
+# Essential packages only
+python-dotenv
+pyyaml
+python-dateutil
+pytz
+
+# Elasticsearch
+elasticsearch
+
+# Data generation
+faker
+
+# CLI utilities
+rich
+click
+
+# API (if needed later)
+fastapi
+uvicorn
+
+# HTTP
+requests

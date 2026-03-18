@@ -1,0 +1,7 @@
+{
+  "timestamp": "2026-02-04T12:30:00",
+  "channel": "alerts",
+  "author": "AlertBot",
+  "message": "\ud83d\udea8 CRITICAL: JVM Heap > 85% for PaymentService API (APP-9123)",
+  "incident_ref": "INC0023456"
+}

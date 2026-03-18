@@ -1,0 +1,328 @@
+# Elasticsearch Configuration for Westpac RCA Demo
+# Version: 9.3.x
+
+connection:
+  url: "${ELASTIC_URL}"
+  username: "${ELASTIC_USERNAME}"
+  password: "${ELASTIC_PASSWORD}"
+  api_key: "${ELASTIC_API_KEY}"
+  cloud_id: "${ELASTIC_CLOUD_ID}"
+  verify_certs: true
+  ca_certs: "${ELASTIC_CA_CERTS}"
+  request_timeout: 30
+  max_retries: 3
+  retry_on_timeout: true
+
+indices:
+  # ServiceNow Data
+  incidents:
+    name: "incidents-servicenow"
+    settings:
+      number_of_shards: 1
+      number_of_replicas: 1
+      refresh_interval: "1s"
+    mappings:
+      properties:
+        incident_id:
+          type: keyword
+        app_id:
+          type: keyword
+        severity:
+          type: keyword
+        created_at:
+          type: date
+        created_by:
+          type: keyword
+        description:
+          type: text
+          fields:
+            keyword:
+              type: keyword
+        affected_ci:
+          type: keyword
+        status:
+          type: keyword
+        resolved_at:
+          type: date
+        resolution_time_minutes:
+          type: integer
+        impact:
+          type: keyword
+        urgency:
+          type: keyword
+        category:
+          type: keyword
+        
+  changes:
+    name: "changes-servicenow"
+    settings:
+      number_of_shards: 1
+      number_of_replicas: 1
+      refresh_interval: "1s"
+    mappings:
+      properties:
+        change_id:
+          type: keyword
+        app_id:
+          type: keyword
+        change_type:
+          type: keyword
+        implemented_at:
+          type: date
+        description:
+          type: text
+        implemented_by:
+          type: keyword
+        status:
+          type: keyword
+        risk_level:
+          type: keyword
+        affected_cis:
+          type: keyword
+          
+  problems:
+    name: "problems-servicenow"
+    settings:
+      number_of_shards: 1
+      number_of_replicas: 1
+    mappings:
+      properties:
+        problem_id:
+          type: keyword
+        app_id:
+          type: keyword
+        created_at:
+          type: date
+        description:
+          type: text
+        root_cause:
+          type: text
+        related_incidents:
+          type: keyword
+        status:
+          type: keyword
+
+  # Observability Data
+  logs_infrastructure:
+    name: "logs-infrastructure"
+    settings:
+      number_of_shards: 2
+      number_of_replicas: 1
+      refresh_interval: "5s"
+    mappings:
+      properties:
+        "@timestamp":
+          type: date
+        log_level:
+          type: keyword
+        app_id:
+          type: keyword
+        host:
+          type: keyword
+        message:
+          type: text
+          analyzer: standard
+        stack_trace:
+          type: text
+        thread:
+          type: keyword
+        error_code:
+          type: keyword
+        
+  logs_application:
+    name: "logs-application"
+    settings:
+      number_of_shards: 2
+      number_of_replicas: 1
+      refresh_interval: "5s"
+    mappings:
+      properties:
+        "@timestamp":
+          type: date
+        log_level:
+          type: keyword
+        app_id:
+          type: keyword
+        service_name:
+          type: keyword
+        message:
+          type: text
+        exception:
+          type: text
+        request_id:
+          type: keyword
+        user_id:
+          type: keyword
+        
+  traces_apm:
+    name: "traces-apm-appdynamics"
+    settings:
+      number_of_shards: 2
+      number_of_replicas: 1
+    mappings:
+      properties:
+        "@timestamp":
+          type: date
+        app_id:
+          type: keyword
+        transaction_name:
+          type: keyword
+        duration_ms:
+          type: long
+        status:
+          type: keyword
+        db_time_ms:
+          type: long
+        error_message:
+          type: text
+        trace_id:
+          type: keyword
+        span_id:
+          type: keyword
+        
+  # Communications
+  comms_teams:
+    name: "comms-teams"
+    settings:
+      number_of_shards: 1
+      number_of_replicas: 1
+    mappings:
+      properties:
+        "@timestamp":
+          type: date
+        channel:
+          type: keyword
+        sender:
+          type: keyword
+        message:
+          type: text
+        thread_id:
+          type: keyword
+        incident_ref:
+          type: keyword
+        mentions:
+          type: keyword
+        
+  comms_email:
+    name: "comms-email"
+    settings:
+      number_of_shards: 1
+      number_of_replicas: 1
+    mappings:
+      properties:
+        "@timestamp":
+          type: date
+        from:
+          type: keyword
+        to:
+          type: keyword
+        cc:
+          type: keyword
+        subject:
+          type: text
+        body:
+          type: text
+        incident_ref:
+          type: keyword
+        attachments:
+          type: keyword
+        
+  # Knowledge Base
+  knowledge_docs:
+    name: "docs-knowledge"
+    settings:
+      number_of_shards: 1
+      number_of_replicas: 1
+    mappings:
+      properties:
+        kb_id:
+          type: keyword
+        title:
+          type: text
+        content:
+          type: text
+        tags:
+          type: keyword
+        category:
+          type: keyword
+        last_updated:
+          type: date
+        view_count:
+          type: integer
+        helpful_count:
+          type: integer
+        # Vector field for ELSER
+        ml:
+          properties:
+            tokens:
+              type: rank_features
+              
+  # Code Repository
+  code_snippets:
+    name: "code-repository"
+    settings:
+      number_of_shards: 1
+      number_of_replicas: 1
+    mappings:
+      properties:
+        file_path:
+          type: keyword
+        app_id:
+          type: keyword
+        language:
+          type: keyword
+        code:
+          type: text
+          analyzer: code
+        commit_hash:
+          type: keyword
+        commit_date:
+          type: date
+        author:
+          type: keyword
+
+analyzers:
+  code:
+    type: custom
+    tokenizer: standard
+    filter:
+      - lowercase
+      - stop
+
+ingest_pipelines:
+  logs_enrichment:
+    description: "Enrich log entries with metadata"
+    processors:
+      - set:
+          field: "ingested_at"
+          value: "{{_ingest.timestamp}}"
+      - lowercase:
+          field: "log_level"
+      - script:
+          lang: painless
+          source: |
+            if (ctx.message != null && ctx.message.contains('Exception')) {
+              ctx.has_exception = true;
+            } else {
+              ctx.has_exception = false;
+            }
+
+ml_config:
+  elser:
+    model_id: ".elser_model_2"
+    enabled: true
+    target_indices:
+      - "docs-knowledge"
+      - "logs-application"
+      - "comms-teams"
+      - "comms-email"
+
+search_settings:
+  default_size: 100
+  max_size: 10000
+  timeout: "30s"
+  
+bulk_settings:
+  chunk_size: 500
+  max_chunk_bytes: 5242880  # 5MB
+  refresh: false

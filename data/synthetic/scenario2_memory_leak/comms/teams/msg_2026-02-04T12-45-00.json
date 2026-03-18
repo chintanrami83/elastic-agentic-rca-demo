@@ -1,0 +1,7 @@
+{
+  "timestamp": "2026-02-04T12:45:00",
+  "channel": "payments-support",
+  "author": "Sarah Chen",
+  "message": "Created INC0023456. Looks like memory leak in new caching code.",
+  "incident_ref": "INC0023456"
+}

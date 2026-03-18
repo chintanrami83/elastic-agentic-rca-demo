@@ -1,0 +1,82 @@
+[
+  {
+    "@timestamp": "2026-02-03T14:05:00+00:00",
+    "app_id": "APP-5521",
+    "app_name": "Inventory Service",
+    "level": "WARN",
+    "message": "Payment service response time exceeded 3000ms",
+    "host": "inventory-api-prod-01",
+    "environment": "production",
+    "logger": "com.westpac.inventory.service.PaymentIntegration"
+  },
+  {
+    "@timestamp": "2026-02-03T14:08:00+00:00",
+    "app_id": "APP-5521",
+    "app_name": "Inventory Service",
+    "level": "ERROR",
+    "message": "Timeout calling payment-service: Connection timeout after 5000ms",
+    "host": "inventory-api-prod-01",
+    "environment": "production",
+    "logger": "com.westpac.inventory.service.PaymentIntegration"
+  },
+  {
+    "@timestamp": "2026-02-03T14:12:00+00:00",
+    "app_id": "APP-5521",
+    "app_name": "Inventory Service",
+    "level": "ERROR",
+    "message": "Payment verification failed - timeout waiting for payment-service",
+    "host": "inventory-api-prod-01",
+    "environment": "production",
+    "logger": "com.westpac.inventory.service.PaymentIntegration"
+  },
+  {
+    "@timestamp": "2026-02-03T14:18:00+00:00",
+    "app_id": "APP-5521",
+    "app_name": "Inventory Service",
+    "level": "CRITICAL",
+    "message": "High timeout rate calling payment-service: 30%",
+    "host": "inventory-api-prod-01",
+    "environment": "production",
+    "logger": "com.westpac.inventory.service.PaymentIntegration"
+  },
+  {
+    "@timestamp": "2026-02-03T14:25:00+00:00",
+    "app_id": "APP-5521",
+    "app_name": "Inventory Service",
+    "level": "ERROR",
+    "message": "Unable to verify payment status - payment-service unavailable",
+    "host": "inventory-api-prod-01",
+    "environment": "production",
+    "logger": "com.westpac.inventory.service.PaymentIntegration"
+  },
+  {
+    "@timestamp": "2026-02-03T14:40:00+00:00",
+    "app_id": "APP-5521",
+    "app_name": "Inventory Service",
+    "level": "CRITICAL",
+    "message": "Cascading failure - payment-service timeouts causing inventory holds",
+    "host": "inventory-api-prod-01",
+    "environment": "production",
+    "logger": "com.westpac.inventory.service.PaymentIntegration"
+  },
+  {
+    "@timestamp": "2026-02-03T15:15:00+00:00",
+    "app_id": "APP-5521",
+    "app_name": "Inventory Service",
+    "level": "INFO",
+    "message": "Payment service response improving",
+    "host": "inventory-api-prod-01",
+    "environment": "production",
+    "logger": "com.westpac.inventory.service.PaymentIntegration"
+  },
+  {
+    "@timestamp": "2026-02-03T15:30:00+00:00",
+    "app_id": "APP-5521",
+    "app_name": "Inventory Service",
+    "level": "INFO",
+    "message": "Payment service integration stabilized",
+    "host": "inventory-api-prod-01",
+    "environment": "production",
+    "logger": "com.westpac.inventory.service.PaymentIntegration"
+  }
+]
