@@ -7,7 +7,7 @@
     "message": "Payment service response time exceeded 3000ms",
     "host": "inventory-api-prod-01",
     "environment": "production",
-    "logger": "com.westpac.inventory.service.PaymentIntegration"
+    "logger": "com.acmebank.inventory.service.PaymentIntegration"
   },
   {
     "@timestamp": "2026-02-03T14:08:00+00:00",
@@ -17,7 +17,7 @@
     "message": "Timeout calling payment-service: Connection timeout after 5000ms",
     "host": "inventory-api-prod-01",
     "environment": "production",
-    "logger": "com.westpac.inventory.service.PaymentIntegration"
+    "logger": "com.acmebank.inventory.service.PaymentIntegration"
   },
   {
     "@timestamp": "2026-02-03T14:12:00+00:00",
@@ -27,7 +27,7 @@
     "message": "Payment verification failed - timeout waiting for payment-service",
     "host": "inventory-api-prod-01",
     "environment": "production",
-    "logger": "com.westpac.inventory.service.PaymentIntegration"
+    "logger": "com.acmebank.inventory.service.PaymentIntegration"
   },
   {
     "@timestamp": "2026-02-03T14:18:00+00:00",
@@ -37,7 +37,7 @@
     "message": "High timeout rate calling payment-service: 30%",
     "host": "inventory-api-prod-01",
     "environment": "production",
-    "logger": "com.westpac.inventory.service.PaymentIntegration"
+    "logger": "com.acmebank.inventory.service.PaymentIntegration"
   },
   {
     "@timestamp": "2026-02-03T14:25:00+00:00",
@@ -47,7 +47,7 @@
     "message": "Unable to verify payment status - payment-service unavailable",
     "host": "inventory-api-prod-01",
     "environment": "production",
-    "logger": "com.westpac.inventory.service.PaymentIntegration"
+    "logger": "com.acmebank.inventory.service.PaymentIntegration"
   },
   {
     "@timestamp": "2026-02-03T14:40:00+00:00",
@@ -57,7 +57,7 @@
     "message": "Cascading failure - payment-service timeouts causing inventory holds",
     "host": "inventory-api-prod-01",
     "environment": "production",
-    "logger": "com.westpac.inventory.service.PaymentIntegration"
+    "logger": "com.acmebank.inventory.service.PaymentIntegration"
   },
   {
     "@timestamp": "2026-02-03T15:15:00+00:00",
@@ -67,7 +67,7 @@
     "message": "Payment service response improving",
     "host": "inventory-api-prod-01",
     "environment": "production",
-    "logger": "com.westpac.inventory.service.PaymentIntegration"
+    "logger": "com.acmebank.inventory.service.PaymentIntegration"
   },
   {
     "@timestamp": "2026-02-03T15:30:00+00:00",
@@ -77,6 +77,6 @@
     "message": "Payment service integration stabilized",
     "host": "inventory-api-prod-01",
     "environment": "production",
-    "logger": "com.westpac.inventory.service.PaymentIntegration"
+    "logger": "com.acmebank.inventory.service.PaymentIntegration"
   }
 ]

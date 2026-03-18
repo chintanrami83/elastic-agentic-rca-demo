@@ -287,7 +287,7 @@ FROM rca-metrics, rca-logs-app, rca-traces, rca-comms-teams, rca-incidents, rca-
 
 ### **Step 2.2: Update Agent System Instructions (20 min)**
 
-**Go to:** AI Assistant → Agents → "Westpac RCA Analyzer"
+**Go to:** AI Assistant → Agents → "Elastic RCA Analyzer"
 
 **Add to system instructions (after existing content):**
 

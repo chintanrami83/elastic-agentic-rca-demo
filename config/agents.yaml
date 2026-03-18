@@ -1,4 +1,4 @@
-# Agent Configuration for Westpac RCA Demo
+# Agent Configuration for Elastic Agentic RCA Demo
 # Defines behavior, capabilities, and settings for each agent
 
 global:
@@ -171,7 +171,7 @@ agents:
     templates:
       default: "config/templates/pir_template.docx"
       styles:
-        - "Westpac Standard"
+        - "Industry Standard"
         - "Technical Deep Dive"
         - "Executive Summary"
         

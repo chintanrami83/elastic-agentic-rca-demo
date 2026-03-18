@@ -266,7 +266,7 @@ def generate_payment_logs():
             "message": message,
             "host": SERVICES["payment"]["host"],
             "environment": "production",
-            "logger": "com.westpac.payment.gateway.StripeClient"
+            "logger": "com.acmebank.payment.gateway.StripeClient"
         }
         logs.append(log)
     
@@ -304,7 +304,7 @@ def generate_inventory_logs():
             "message": message,
             "host": SERVICES["inventory"]["host"],
             "environment": "production",
-            "logger": "com.westpac.inventory.service.PaymentIntegration"
+            "logger": "com.acmebank.inventory.service.PaymentIntegration"
         }
         logs.append(log)
     
@@ -344,7 +344,7 @@ def generate_order_logs():
             "message": message,
             "host": SERVICES["order"]["host"],
             "environment": "production",
-            "logger": "com.westpac.order.gateway.OrderController"
+            "logger": "com.acmebank.order.gateway.OrderController"
         }
         logs.append(log)
     

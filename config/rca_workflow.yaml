@@ -1,7 +1,7 @@
-# Westpac RCA Workflow Definition
+# Elastic RCA Workflow Definition
 # Elastic AgenticAI Workflow for Automated Root Cause Analysis
 
-name: westpac_rca_workflow
+name: acmebank_rca_workflow
 version: 1.0.0
 description: Automated Root Cause Analysis for IT Incidents using AgenticAI
 
@@ -161,7 +161,7 @@ tags:
   - rca
   - incident_management
   - automation
-  - westpac
+  - acmebank
 
 metadata:
   team: platform_engineering

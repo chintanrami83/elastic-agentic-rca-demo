@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Westpac RCA Demo - Fixed Setup Script for Python 3.13
+# Elastic Agentic RCA Demo - Fixed Setup Script for Python 3.13
 # Run this to verify everything is ready
 
 echo "=========================================="
-echo "Westpac RCA Demo - Setup (Python 3.13)"
+echo "Elastic Agentic RCA Demo - Setup (Python 3.13)"
 echo "=========================================="
 echo ""
 

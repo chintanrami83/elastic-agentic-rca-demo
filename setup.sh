@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Westpac RCA Demo - Quick Setup Script
+# Elastic Agentic RCA Demo - Quick Setup Script
 # This script sets up the entire demo environment
 
 set -e  # Exit on error
@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 PROJECT_ROOT="$(pwd)"
 
 echo -e "${BLUE}========================================${NC}"
-echo -e "${BLUE}Westpac RCA Demo - Quick Setup${NC}"
+echo -e "${BLUE}Elastic Agentic RCA Demo - Quick Setup${NC}"
 echo -e "${BLUE}========================================${NC}"
 echo ""
 

@@ -93,7 +93,7 @@ python scripts/utilities/setup_elasticsearch.py
 ### After test_connectivity.py:
 ```
 ✓ Connected to Elasticsearch 9.3.0
-✓ Cluster: westpac-rca-demo-system
+✓ Cluster: acmebank-rca-demo
 ✓ ML Node Available
 ✓ ELSER Model Found
 ```

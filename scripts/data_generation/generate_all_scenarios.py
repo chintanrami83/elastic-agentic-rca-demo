@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate All Scenarios - Westpac RCA Demo
+Generate All Scenarios - Elastic Agentic RCA Demo
 UPDATED: Uses current dates (Feb 4, 2026)
 Creates synthetic data with timestamps from TODAY
 """
@@ -30,12 +30,12 @@ DATA_DIR = Path(__file__).parent.parent.parent / "data" / "synthetic"
 
 # Common people for consistency
 TEAM_MEMBERS = [
-    "john.smith@westpac.com",
-    "sarah.chen@westpac.com",
-    "marcus.liu@westpac.com",
-    "emily.johnson@westpac.com",
-    "david.kumar@westpac.com",
-    "lisa.wong@westpac.com"
+    "john.smith@acmebank.com",
+    "sarah.chen@acmebank.com",
+    "marcus.liu@acmebank.com",
+    "emily.johnson@acmebank.com",
+    "david.kumar@acmebank.com",
+    "lisa.wong@acmebank.com"
 ]
 
 # Common hosts
@@ -92,7 +92,7 @@ def generate_scenario_1():
         "app_id": app_id,
         "severity": "P1",
         "created_at": format_datetime(incident_created),
-        "created_by": "john.smith@westpac.com",
+        "created_by": "john.smith@acmebank.com",
         "description": "CustomerPortal API returning 500 errors - connection pool exhausted",
         "affected_ci": "CustomerPortal-API-PROD",
         "status": "Resolved",
@@ -123,7 +123,7 @@ def generate_scenario_1():
             "change_type": "Emergency",
             "implemented_at": format_datetime(today.replace(hour=10, minute=30)),
             "description": "Update connection pool max size to 200",
-            "implemented_by": "sarah.chen@westpac.com",
+            "implemented_by": "sarah.chen@acmebank.com",
             "status": "Successful",
             "risk_level": "Low",
             "affected_cis": ["CustomerPortal-API-PROD"]
@@ -233,7 +233,7 @@ def generate_scenario_1():
         {
             "@timestamp": format_datetime(today.replace(hour=9, minute=5)),
             "channel": "incident-customerportal",
-            "sender": "john.smith@westpac.com",
+            "sender": "john.smith@acmebank.com",
             "message": "Seeing connection errors in CustomerPortal, investigating now",
             "thread_id": "thread-001",
             "incident_ref": incident_id
@@ -241,7 +241,7 @@ def generate_scenario_1():
         {
             "@timestamp": format_datetime(today.replace(hour=9, minute=15)),
             "channel": "incident-customerportal",
-            "sender": "john.smith@westpac.com",
+            "sender": "john.smith@acmebank.com",
             "message": "This correlates with this morning's deployment - v2.3.1 went live at 08:00",
             "thread_id": "thread-001",
             "incident_ref": incident_id
@@ -249,7 +249,7 @@ def generate_scenario_1():
         {
             "@timestamp": format_datetime(today.replace(hour=9, minute=30)),
             "channel": "incident-customerportal",
-            "sender": "sarah.chen@westpac.com",
+            "sender": "sarah.chen@acmebank.com",
             "message": "Checking database connection pool metrics now",
             "thread_id": "thread-001",
             "incident_ref": incident_id
@@ -257,7 +257,7 @@ def generate_scenario_1():
         {
             "@timestamp": format_datetime(today.replace(hour=10, minute=0)),
             "channel": "incident-customerportal",
-            "sender": "sarah.chen@westpac.com",
+            "sender": "sarah.chen@acmebank.com",
             "message": "Found it - new API calls not releasing connections properly. Pool maxed at 50, need ~150",
             "thread_id": "thread-001",
             "incident_ref": incident_id
@@ -265,7 +265,7 @@ def generate_scenario_1():
         {
             "@timestamp": format_datetime(today.replace(hour=10, minute=20)),
             "channel": "incident-customerportal",
-            "sender": "john.smith@westpac.com",
+            "sender": "john.smith@acmebank.com",
             "message": "Preparing emergency change to increase pool size",
             "thread_id": "thread-001",
             "incident_ref": incident_id
@@ -273,7 +273,7 @@ def generate_scenario_1():
         {
             "@timestamp": format_datetime(today.replace(hour=11, minute=10)),
             "channel": "incident-customerportal",
-            "sender": "sarah.chen@westpac.com",
+            "sender": "sarah.chen@acmebank.com",
             "message": "Resolved - increased pool size to 200 and restarted. Will create PIR this afternoon",
             "thread_id": "thread-001",
             "incident_ref": incident_id
@@ -285,16 +285,16 @@ def generate_scenario_1():
     emails = [
         {
             "@timestamp": format_datetime(today.replace(hour=8, minute=35)),
-            "from": "monitoring@westpac.com",
-            "to": "oncall-platform@westpac.com",
+            "from": "monitoring@acmebank.com",
+            "to": "oncall-platform@acmebank.com",
             "subject": "CRITICAL: CustomerPortal API error rate exceeded",
             "body": "Error rate: 45/min at 08:30 AEDT. Immediate attention required.",
             "incident_ref": incident_id
         },
         {
             "@timestamp": format_datetime(today.replace(hour=9, minute=45)),
-            "from": "john.smith@westpac.com",
-            "to": "dba-team@westpac.com",
+            "from": "john.smith@acmebank.com",
+            "to": "dba-team@acmebank.com",
             "subject": "Urgent: Connection pool issues on CustomerPortal DB",
             "body": "Seeing connection pool exhaustion. Need DBA team assistance.",
             "incident_ref": incident_id
@@ -353,7 +353,7 @@ def main():
     """Main generation function"""
     
     console.print("\n[bold blue]═══════════════════════════════════════════[/bold blue]")
-    console.print("[bold blue]  Westpac RCA Demo - Data Generation       [/bold blue]")
+    console.print("[bold blue]  Elastic Agentic RCA Demo - Data Generation       [/bold blue]")
     console.print("[bold blue]  UPDATED: Current dates (Feb 4, 2026)     [/bold blue]")
     console.print("[bold blue]═══════════════════════════════════════════[/bold blue]\n")
     

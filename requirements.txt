@@ -1,4 +1,4 @@
-# Westpac RCA Demo - Python Dependencies
+# Elastic Agentic RCA Demo - Python Dependencies
 # Generated: February 5, 2026
 
 # Core Framework

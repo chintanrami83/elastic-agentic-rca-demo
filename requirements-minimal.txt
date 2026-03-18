@@ -1,4 +1,4 @@
-# Westpac RCA Demo - Minimal Requirements
+# Elastic Agentic RCA Demo - Minimal Requirements
 # Works with Python 3.11, 3.12, 3.13
 
 # Essential packages only

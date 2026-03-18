@@ -7,7 +7,7 @@
     "message": "Order processing slowing - inventory-service delays",
     "host": "order-gateway-prod-03",
     "environment": "production",
-    "logger": "com.westpac.order.gateway.OrderController"
+    "logger": "com.acmebank.order.gateway.OrderController"
   },
   {
     "@timestamp": "2026-02-03T14:10:00+00:00",
@@ -17,7 +17,7 @@
     "message": "Order creation failed - inventory-service timeout",
     "host": "order-gateway-prod-03",
     "environment": "production",
-    "logger": "com.westpac.order.gateway.OrderController"
+    "logger": "com.acmebank.order.gateway.OrderController"
   },
   {
     "@timestamp": "2026-02-03T14:12:00+00:00",
@@ -27,7 +27,7 @@
     "message": "HTTP 504 Gateway Timeout from inventory-service",
     "host": "order-gateway-prod-03",
     "environment": "production",
-    "logger": "com.westpac.order.gateway.OrderController"
+    "logger": "com.acmebank.order.gateway.OrderController"
   },
   {
     "@timestamp": "2026-02-03T14:15:00+00:00",
@@ -37,7 +37,7 @@
     "message": "Order failure rate spiking - 45% failed",
     "host": "order-gateway-prod-03",
     "environment": "production",
-    "logger": "com.westpac.order.gateway.OrderController"
+    "logger": "com.acmebank.order.gateway.OrderController"
   },
   {
     "@timestamp": "2026-02-03T14:20:00+00:00",
@@ -47,7 +47,7 @@
     "message": "Customer impact - orders failing due to downstream timeouts",
     "host": "order-gateway-prod-03",
     "environment": "production",
-    "logger": "com.westpac.order.gateway.OrderController"
+    "logger": "com.acmebank.order.gateway.OrderController"
   },
   {
     "@timestamp": "2026-02-03T14:30:00+00:00",
@@ -57,7 +57,7 @@
     "message": "Cascading timeout - inventory-service \u2192 payment-service",
     "host": "order-gateway-prod-03",
     "environment": "production",
-    "logger": "com.westpac.order.gateway.OrderController"
+    "logger": "com.acmebank.order.gateway.OrderController"
   },
   {
     "@timestamp": "2026-02-03T14:45:00+00:00",
@@ -67,7 +67,7 @@
     "message": "Critical: 50% order failure rate",
     "host": "order-gateway-prod-03",
     "environment": "production",
-    "logger": "com.westpac.order.gateway.OrderController"
+    "logger": "com.acmebank.order.gateway.OrderController"
   },
   {
     "@timestamp": "2026-02-03T15:00:00+00:00",
@@ -77,7 +77,7 @@
     "message": "Multiple downstream service failures detected",
     "host": "order-gateway-prod-03",
     "environment": "production",
-    "logger": "com.westpac.order.gateway.OrderController"
+    "logger": "com.acmebank.order.gateway.OrderController"
   },
   {
     "@timestamp": "2026-02-03T15:20:00+00:00",
@@ -87,7 +87,7 @@
     "message": "Downstream services recovering",
     "host": "order-gateway-prod-03",
     "environment": "production",
-    "logger": "com.westpac.order.gateway.OrderController"
+    "logger": "com.acmebank.order.gateway.OrderController"
   },
   {
     "@timestamp": "2026-02-03T15:35:00+00:00",
@@ -97,6 +97,6 @@
     "message": "Order processing normalized",
     "host": "order-gateway-prod-03",
     "environment": "production",
-    "logger": "com.westpac.order.gateway.OrderController"
+    "logger": "com.acmebank.order.gateway.OrderController"
   }
 ]

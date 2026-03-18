@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ingest All Data - Westpac RCA Demo
+Ingest All Data - Elastic Agentic RCA Demo
 Loads synthetic data into Elasticsearch indices
 """
 
@@ -116,7 +116,7 @@ def main():
     """Main ingestion function"""
     
     console.print("\n[bold blue]═══════════════════════════════════════════[/bold blue]")
-    console.print("[bold blue]  Westpac RCA Demo - Data Ingestion        [/bold blue]")
+    console.print("[bold blue]  Elastic Agentic RCA Demo - Data Ingestion        [/bold blue]")
     console.print("[bold blue]═══════════════════════════════════════════[/bold blue]\n")
     
     try:

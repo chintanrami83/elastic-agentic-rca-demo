@@ -291,7 +291,7 @@ def main(force: bool = False):
     """Main setup function"""
     
     console.print("\n[bold blue]═══════════════════════════════════════════[/bold blue]")
-    console.print("[bold blue]   Westpac RCA Demo - Elasticsearch Setup   [/bold blue]")
+    console.print("[bold blue]   Elastic Agentic RCA Demo - Elasticsearch Setup   [/bold blue]")
     console.print("[bold blue]   (Fixed for Elastic Cloud 9.3)            [/bold blue]")
     console.print("[bold blue]═══════════════════════════════════════════[/bold blue]\n")
     
@@ -355,7 +355,7 @@ def main(force: bool = False):
 if __name__ == "__main__":
     import argparse
     
-    parser = argparse.ArgumentParser(description="Setup Elasticsearch for Westpac RCA Demo")
+    parser = argparse.ArgumentParser(description="Setup Elasticsearch for Elastic Agentic RCA Demo")
     parser.add_argument('--force', action='store_true', help='Delete and recreate existing indices')
     args = parser.parse_args()
     

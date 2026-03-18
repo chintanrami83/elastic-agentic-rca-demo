@@ -6,7 +6,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-24",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -16,7 +16,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-29",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -26,7 +26,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-38",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -36,7 +36,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-5",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -46,7 +46,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-39",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -56,7 +56,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-1",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -66,7 +66,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-48",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -76,7 +76,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-1",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -86,7 +86,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-49",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -96,7 +96,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-27",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -106,7 +106,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-26",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -116,7 +116,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-3",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -126,7 +126,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-24",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -136,7 +136,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-36",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -146,7 +146,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-48",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -156,7 +156,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-15",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -166,7 +166,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-17",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -176,7 +176,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-16",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -186,7 +186,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-12",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -196,7 +196,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-28",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -206,7 +206,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-31",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -216,7 +216,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-44",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -226,7 +226,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-11",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -236,7 +236,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-43",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -246,7 +246,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-34",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -256,7 +256,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-37",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -266,7 +266,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-18",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -276,7 +276,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-3",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -286,7 +286,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-42",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -296,7 +296,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-25",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -306,7 +306,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-28",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -316,7 +316,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-23",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -326,7 +326,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-24",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -336,7 +336,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-28",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -346,7 +346,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-25",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -356,7 +356,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-4",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -366,7 +366,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-48",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -376,7 +376,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-10",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -386,7 +386,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-38",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -396,7 +396,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-3",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -406,7 +406,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-45",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -416,7 +416,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-43",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -426,7 +426,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-27",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -436,7 +436,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-33",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -446,7 +446,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-10",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -456,7 +456,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-50",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -466,7 +466,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-15",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -476,7 +476,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-8",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -486,7 +486,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-22",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -496,7 +496,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-35",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -506,7 +506,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-11",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -516,7 +516,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-40",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -526,7 +526,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-42",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -536,7 +536,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-20",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -546,7 +546,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-28",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -556,7 +556,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-26",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -566,7 +566,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-21",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -576,7 +576,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-20",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -586,7 +586,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-13",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -596,7 +596,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-8",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -606,7 +606,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-20",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -616,7 +616,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-7",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -626,7 +626,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-44",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -636,7 +636,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-28",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -646,7 +646,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-42",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -656,7 +656,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-32",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -666,7 +666,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-24",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -676,7 +676,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-18",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -686,7 +686,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-1",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -696,7 +696,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-28",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -706,7 +706,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-22",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -716,7 +716,7 @@
     "log_level": "INFO",
     "message": "Payment processing completed successfully",
     "thread": "http-nio-8080-exec-20",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -726,7 +726,7 @@
     "log_level": "WARN",
     "message": "GC frequency increasing",
     "thread": "http-nio-8080-exec-5",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -736,7 +736,7 @@
     "log_level": "WARN",
     "message": "GC frequency increasing",
     "thread": "http-nio-8080-exec-34",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -746,7 +746,7 @@
     "log_level": "WARN",
     "message": "Response time degradation observed",
     "thread": "http-nio-8080-exec-24",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -756,7 +756,7 @@
     "log_level": "WARN",
     "message": "High heap usage detected: 77%",
     "thread": "http-nio-8080-exec-2",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -766,7 +766,7 @@
     "log_level": "WARN",
     "message": "Session cache growing rapidly",
     "thread": "http-nio-8080-exec-9",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -776,7 +776,7 @@
     "log_level": "WARN",
     "message": "Memory pressure warning",
     "thread": "http-nio-8080-exec-27",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -786,7 +786,7 @@
     "log_level": "WARN",
     "message": "GC frequency increasing",
     "thread": "http-nio-8080-exec-49",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -796,7 +796,7 @@
     "log_level": "WARN",
     "message": "GC frequency increasing",
     "thread": "http-nio-8080-exec-41",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -806,7 +806,7 @@
     "log_level": "WARN",
     "message": "High heap usage detected: 79%",
     "thread": "http-nio-8080-exec-23",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -816,7 +816,7 @@
     "log_level": "WARN",
     "message": "Session cache growing rapidly",
     "thread": "http-nio-8080-exec-26",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -826,7 +826,7 @@
     "log_level": "WARN",
     "message": "Session cache growing rapidly",
     "thread": "http-nio-8080-exec-46",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -836,7 +836,7 @@
     "log_level": "WARN",
     "message": "Response time degradation observed",
     "thread": "http-nio-8080-exec-21",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -846,7 +846,7 @@
     "log_level": "WARN",
     "message": "Session cache growing rapidly",
     "thread": "http-nio-8080-exec-37",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -856,7 +856,7 @@
     "log_level": "WARN",
     "message": "High heap usage detected: 82%",
     "thread": "http-nio-8080-exec-25",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -866,7 +866,7 @@
     "log_level": "WARN",
     "message": "Response time degradation observed",
     "thread": "http-nio-8080-exec-7",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -876,7 +876,7 @@
     "log_level": "WARN",
     "message": "Response time degradation observed",
     "thread": "http-nio-8080-exec-21",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -886,7 +886,7 @@
     "log_level": "WARN",
     "message": "Session cache growing rapidly",
     "thread": "http-nio-8080-exec-30",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -896,7 +896,7 @@
     "log_level": "WARN",
     "message": "Session cache growing rapidly",
     "thread": "http-nio-8080-exec-33",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -906,7 +906,7 @@
     "log_level": "WARN",
     "message": "Memory pressure warning",
     "thread": "http-nio-8080-exec-23",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -916,7 +916,7 @@
     "log_level": "ERROR",
     "message": "OutOfMemoryError: Java heap space",
     "thread": "http-nio-8080-exec-28",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -926,7 +926,7 @@
     "log_level": "ERROR",
     "message": "OutOfMemoryError: Java heap space",
     "thread": "http-nio-8080-exec-32",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -936,7 +936,7 @@
     "log_level": "ERROR",
     "message": "Memory allocation failure in SessionCacheManager",
     "thread": "http-nio-8080-exec-27",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -946,7 +946,7 @@
     "log_level": "ERROR",
     "message": "GC overhead limit exceeded",
     "thread": "http-nio-8080-exec-25",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -956,7 +956,7 @@
     "log_level": "ERROR",
     "message": "Payment context cache size exceeds threshold",
     "thread": "http-nio-8080-exec-39",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -966,7 +966,7 @@
     "log_level": "ERROR",
     "message": "Memory allocation failure in SessionCacheManager",
     "thread": "http-nio-8080-exec-25",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -976,7 +976,7 @@
     "log_level": "ERROR",
     "message": "GC overhead limit exceeded",
     "thread": "http-nio-8080-exec-9",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -986,7 +986,7 @@
     "log_level": "ERROR",
     "message": "Memory allocation failure in SessionCacheManager",
     "thread": "http-nio-8080-exec-12",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -996,7 +996,7 @@
     "log_level": "ERROR",
     "message": "Unable to create new native thread",
     "thread": "http-nio-8080-exec-11",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   },
   {
@@ -1006,7 +1006,7 @@
     "log_level": "ERROR",
     "message": "Session cache allocation failed",
     "thread": "http-nio-8080-exec-23",
-    "class": "com.westpac.payment.service.PaymentProcessor",
+    "class": "com.acmebank.payment.service.PaymentProcessor",
     "host": "payment-api-prod-03"
   }
 ]

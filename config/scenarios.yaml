@@ -18,12 +18,12 @@ scenarios:
       app_id: "APP-2847"
       name: "CustomerPortal-API"
       team: "Digital Platform"
-      oncall: "john.smith@westpac.com"
+      oncall: "john.smith@acmebank.com"
     
     incident:
       incident_id: "INC0012345"
       created_at: "2026-02-08T02:40:00+11:00"
-      created_by: "john.smith@westpac.com"
+      created_by: "john.smith@acmebank.com"
       description: "CustomerPortal API returning 500 errors - connection pool exhausted"
       affected_ci: "CustomerPortal-API-PROD"
       status: "Resolved"
@@ -95,8 +95,8 @@ scenarios:
         source: "email"
         description: "Alert notification sent to on-call"
         data:
-          from: "monitoring@westpac.com"
-          to: "oncall-platform@westpac.com"
+          from: "monitoring@acmebank.com"
+          to: "oncall-platform@acmebank.com"
           subject: "CRITICAL: CustomerPortal API error rate exceeded"
           
       - timestamp: "2026-02-08T02:40:00+11:00"
@@ -105,7 +105,7 @@ scenarios:
         description: "Incident created"
         data:
           incident_id: "INC0012345"
-          created_by: "john.smith@westpac.com"
+          created_by: "john.smith@acmebank.com"
           
       - timestamp: "2026-02-08T02:42:00+11:00"
         event_type: "chat"
@@ -113,7 +113,7 @@ scenarios:
         description: "Initial investigation message"
         data:
           channel: "incident-customerportal"
-          sender: "john.smith@westpac.com"
+          sender: "john.smith@acmebank.com"
           message: "Seeing connection errors in CustomerPortal, investigating now"
           
       - timestamp: "2026-02-08T02:55:00+11:00"
@@ -121,7 +121,7 @@ scenarios:
         source: "teams"
         description: "Correlation identified"
         data:
-          sender: "john.smith@westpac.com"
+          sender: "john.smith@acmebank.com"
           message: "This correlates with tonight's deployment - v2.3.1 went live at 01:45"
           
       - timestamp: "2026-02-08T03:10:00+11:00"
@@ -129,8 +129,8 @@ scenarios:
         source: "email"
         description: "Escalation to DBA team"
         data:
-          from: "john.smith@westpac.com"
-          to: "dba-team@westpac.com"
+          from: "john.smith@acmebank.com"
+          to: "dba-team@acmebank.com"
           subject: "Urgent: Connection pool issues on CustomerPortal DB"
           
       - timestamp: "2026-02-08T03:15:00+11:00"
@@ -146,7 +146,7 @@ scenarios:
         source: "teams"
         description: "Root cause identified"
         data:
-          sender: "sarah.chen@westpac.com"
+          sender: "sarah.chen@acmebank.com"
           message: "Found it - new API calls not releasing connections properly. Pool maxed at 50, need ~150"
           
       - timestamp: "2026-02-08T03:35:00+11:00"
@@ -201,12 +201,12 @@ scenarios:
       app_id: "APP-1923"
       name: "PaymentService-Core"
       team: "Payments Platform"
-      oncall: "sarah.chen@westpac.com"
+      oncall: "sarah.chen@acmebank.com"
     
     incident:
       incident_id: "INC0012346"
       created_at: "2026-02-09T15:10:00+11:00"
-      created_by: "sarah.chen@westpac.com"
+      created_by: "sarah.chen@acmebank.com"
       description: "PaymentService pods restarting due to OutOfMemoryError"
       affected_ci: "PaymentService-Core-PROD"
       status: "Resolved"
@@ -283,8 +283,8 @@ scenarios:
         source: "email"
         description: "SRE alerted about pod restarts"
         data:
-          from: "k8s-monitoring@westpac.com"
-          to: "sre-team@westpac.com"
+          from: "k8s-monitoring@acmebank.com"
+          to: "sre-team@acmebank.com"
           subject: "Multiple pod restarts: PaymentService-Core"
           
       - timestamp: "2026-02-09T15:10:00+11:00"
@@ -300,7 +300,7 @@ scenarios:
         description: "Investigation started"
         data:
           channel: "incident-payment"
-          sender: "sarah.chen@westpac.com"
+          sender: "sarah.chen@acmebank.com"
           message: "PaymentService keeps OOMing after this morning's release. Heap dump captured."
           
       - timestamp: "2026-02-09T15:30:00+11:00"
@@ -308,7 +308,7 @@ scenarios:
         source: "teams"
         description: "Heap dump analysis"
         data:
-          sender: "marcus.liu@westpac.com"
+          sender: "marcus.liu@acmebank.com"
           message: "Heap dump shows PaymentMethodCache consuming 2.1GB. Objects not being evicted."
           
       - timestamp: "2026-02-09T15:45:00+11:00"
@@ -316,8 +316,8 @@ scenarios:
         source: "email"
         description: "Heap analysis shared with dev team"
         data:
-          from: "marcus.liu@westpac.com"
-          to: "dev-payments@westpac.com"
+          from: "marcus.liu@acmebank.com"
+          to: "dev-payments@acmebank.com"
           subject: "Heap dump analysis - PaymentMethodCache leak"
           
       - timestamp: "2026-02-09T16:00:00+11:00"
@@ -334,7 +334,7 @@ scenarios:
         source: "teams"
         description: "Root cause confirmed"
         data:
-          sender: "dev-lead@westpac.com"
+          sender: "dev-lead@acmebank.com"
           message: "Confirmed - cache eviction not working. Objects accumulating indefinitely."
           
       - timestamp: "2026-02-09T16:30:00+11:00"
@@ -389,12 +389,12 @@ scenarios:
       app_id: "APP-3621"
       name: "API-Gateway"
       team: "API Platform"
-      oncall: "marcus.liu@westpac.com"
+      oncall: "marcus.liu@acmebank.com"
     
     incident:
       incident_id: "INC0012347"
       created_at: "2026-02-10T20:20:00+11:00"
-      created_by: "marcus.liu@westpac.com"
+      created_by: "marcus.liu@acmebank.com"
       description: "API Gateway timeout errors - 15% failure rate"
       affected_ci: "API-Gateway-PROD"
       status: "Resolved"
@@ -471,7 +471,7 @@ scenarios:
         source: "teams"
         description: "Initial investigation"
         data:
-          sender: "marcus.liu@westpac.com"
+          sender: "marcus.liu@acmebank.com"
           message: "Gateway timing out - checking downstream services"
           
       - timestamp: "2026-02-10T20:35:00+11:00"
@@ -488,8 +488,8 @@ scenarios:
         source: "email"
         description: "DBA team engaged"
         data:
-          from: "marcus.liu@westpac.com"
-          to: "dba-team@westpac.com"
+          from: "marcus.liu@acmebank.com"
+          to: "dba-team@acmebank.com"
           subject: "Urgent: AccountService DB queries extremely slow"
           
       - timestamp: "2026-02-10T20:50:00+11:00"
@@ -497,7 +497,7 @@ scenarios:
         source: "teams"
         description: "Index missing identified"
         data:
-          sender: "dba-lead@westpac.com"
+          sender: "dba-lead@acmebank.com"
           message: "Missing index on account_transactions.account_id - recent migration didn't recreate it"
           
       - timestamp: "2026-02-10T20:55:00+11:00"

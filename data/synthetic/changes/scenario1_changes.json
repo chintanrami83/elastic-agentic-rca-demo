@@ -18,7 +18,7 @@
     "change_type": "Emergency",
     "implemented_at": "2026-02-04T10:30:00+11:00",
     "description": "Update connection pool max size to 200",
-    "implemented_by": "sarah.chen@westpac.com",
+    "implemented_by": "sarah.chen@acmebank.com",
     "status": "Successful",
     "risk_level": "Low",
     "affected_cis": [

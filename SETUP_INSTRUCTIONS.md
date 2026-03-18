@@ -1,4 +1,4 @@
-# Westpac RCA Demo - Setup Instructions
+# Elastic Agentic RCA Demo - Setup Instructions
 
 ## IMPORTANT: Download All Files First!
 

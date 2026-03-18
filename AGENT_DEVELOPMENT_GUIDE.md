@@ -1,4 +1,4 @@
-# Westpac RCA AgenticAI System - Development Guide
+# Elastic AgenticAI RCA System - Development Guide
 
 ## 🎯 What We're Building
 

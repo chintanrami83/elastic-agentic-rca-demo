@@ -62,7 +62,7 @@ def test_connectivity():
         
         # Check existing indices
         console.print("\n[bold]Checking for existing indices...[/bold]")
-        indices = es.indices.get_alias(index="*westpac*,*servicenow*,*logs*,*traces*,*comms*,*docs*,*code*")
+        indices = es.indices.get_alias(index="*servicenow*,*logs*,*traces*,*comms*,*docs*,*code*")
         
         if indices:
             index_table = Table(title="Existing Indices")

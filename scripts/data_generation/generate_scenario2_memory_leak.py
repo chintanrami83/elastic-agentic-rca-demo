@@ -237,7 +237,7 @@ def generate_application_logs():
             "log_level": log_level,
             "message": message,
             "thread": f"http-nio-8080-exec-{random.randint(1, 50)}",
-            "class": "com.westpac.payment.service.PaymentProcessor",
+            "class": "com.acmebank.payment.service.PaymentProcessor",
             "host": "payment-api-prod-03"
         }
         
