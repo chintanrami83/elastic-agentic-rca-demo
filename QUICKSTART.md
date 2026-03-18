@@ -1,146 +1,167 @@
 # Quick Start Guide
 
-## Step-by-Step Setup
+Get the demo running in your environment in 15 minutes.
 
-### 1. Navigate to Project Directory
+---
+
+## Prerequisites
+
+- Python 3.11 or 3.12
+- Elastic Cloud deployment v9.2+ with ELSER model deployed
+- Git
+
+---
+
+## Step 1 — Clone and Configure
+
 ```bash
-cd /path/to/elastic-agentic-rca-demo
+git clone https://github.com/your-org/elastic-agentic-rca-demo.git
+cd elastic-agentic-rca-demo
+cp .env.example .env
 ```
 
-### 2. Run the Test Setup Script
-This will:
-- Check Python installation
-- Create virtual environment
-- Install all dependencies
-- Test Elasticsearch connection
+Edit `.env` and fill in your Elastic Cloud credentials:
 
-```bash
-./test_setup.sh
+```
+ELASTIC_URL=https://your-cluster.es.your-region.gcp.elastic-cloud.com
+ELASTIC_USERNAME=elastic
+ELASTIC_PASSWORD=your-password
+KIBANA_URL=https://your-cluster.kb.your-region.gcp.elastic-cloud.com
 ```
 
-### 3. If test_setup.sh succeeds, proceed to create indices
+---
+
+## Step 2 — Install Dependencies
+
 ```bash
-source venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+---
+
+## Step 3 — Test Connectivity
+
+```bash
+python scripts/utilities/test_connectivity.py
+```
+
+Expected output:
+```
+✓ Connected to Elasticsearch 9.x.x
+✓ ELSER model found
+✓ Kibana reachable
+```
+
+If this fails, double-check your `.env` values and that your cluster is running.
+
+---
+
+## Step 4 — Create Elasticsearch Indices
+
+```bash
 python scripts/utilities/setup_elasticsearch.py
 ```
 
-### 4. Check What You Have
-```bash
-# List all files
-ls -la
-
-# Check if scripts exist
-ls -la scripts/utilities/
-
-# Your files should include:
-# - test_connectivity.py
-# - setup_elasticsearch.py  
-# - es_client.py
+This creates all required indices:
 ```
+✓ incidents-servicenow
+✓ changes-servicenow
+✓ logs-application
+✓ logs-infrastructure
+✓ traces-apm
+✓ comms-teams
+✓ comms-email
+✓ knowledge-base
+✓ rca-metrics
+✓ rca-alerts
+```
+
+---
+
+## Step 5 — Ingest Demo Data
+
+```bash
+# Ingest all 3 scenarios at once
+python scripts/data_ingestion/ingest_all_data.py
+
+# Or ingest individual scenarios
+python scripts/data_ingestion/ingest_scenario2_data.py
+python scripts/data_ingestion/ingest_scenario3_data.py
+```
+
+Expected output:
+```
+✓ Scenario 1: 156 documents indexed
+✓ Scenario 2: 180 documents indexed
+✓ Scenario 3: 228 documents indexed
+Total: 564 documents ingested
+```
+
+---
+
+## Step 6 — Verify in Kibana
+
+1. Open Kibana → **Discover**
+2. Create a data view with index pattern `rca-*` and time field `@timestamp`
+3. Run these searches to confirm data loaded correctly:
+
+**Scenario 1 — DB Connection Pool:**
+```
+incident_id:"INC0012345"
+```
+Expected: ~156 documents
+
+**Scenario 2 — Memory Leak:**
+```
+incident_id:"INC0023456"
+```
+Expected: ~180 documents
+
+**Scenario 3 — Cascading Timeout:**
+```
+incident_id:"INC0034567"
+```
+Expected: ~228 documents
+
+---
+
+## Step 7 — Run the Demo
+
+### Scenario 2 — Live Alert-Driven RCA (recommended starting point)
+
+Start the continuous memory leak data generator to trigger a real Kibana alert:
+
+```bash
+bash scripts/demo/start_generator.sh
+```
+
+This streams live JVM heap metrics into Elasticsearch. Once heap exceeds 85%, your Kibana alert fires and the Elastic Workflow activates the `rca_agent` automatically.
+
+Stop the generator when done:
+```bash
+bash scripts/demo/stop_generator.sh
+```
+
+---
 
 ## Troubleshooting
 
-### If you get "requirements.txt not found"
-Make sure you're in the correct directory:
+**`ModuleNotFoundError`** — virtual environment not activated:
 ```bash
-pwd
-# Should show: /path/to/elastic-agentic-rca-demo
-```
-
-### If you get "Python command not found"
-Check your Python installation:
-```bash
-which python3
-python3 --version
-```
-
-### If virtual environment fails
-Try manually:
-```bash
-python3 -m venv venv
 source venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
 ```
 
-## Manual Step-by-Step (If Script Fails)
-
+**`ConnectionError`** — check `.env` credentials and that your cluster is reachable:
 ```bash
-# 1. Go to directory
-cd /path/to/elastic-agentic-rca-demo
-
-# 2. Create virtual environment
-python3 -m venv venv
-
-# 3. Activate it
-source venv/bin/activate
-
-# 4. Upgrade pip
-pip install --upgrade pip
-
-# 5. Install dependencies
-pip install -r requirements.txt
-
-# 6. Test connection
 python scripts/utilities/test_connectivity.py
-
-# 7. Setup Elasticsearch
-python scripts/utilities/setup_elasticsearch.py
 ```
 
-## What You Should See
-
-### After test_connectivity.py:
-```
-✓ Connected to Elasticsearch 9.3.0
-✓ Cluster: acmebank-rca-demo
-✓ ML Node Available
-✓ ELSER Model Found
+**No data in Kibana** — re-run ingestion:
+```bash
+python scripts/data_ingestion/ingest_all_data.py
 ```
 
-### After setup_elasticsearch.py:
-```
-✓ Created 10 indices:
-  - incidents-servicenow
-  - changes-servicenow
-  - problems-servicenow
-  - logs-infrastructure
-  - logs-application
-  - traces-apm-appdynamics
-  - comms-teams
-  - comms-email
-  - docs-knowledge
-  - code-repository
-```
-
-## Files You Currently Have
-
-```
-✓ requirements.txt
-✓ .env (with Elastic credentials)
-✓ .env.example
-✓ .gitignore
-✓ setup.sh
-✓ test_setup.sh
-✓ config/elastic.yaml
-✓ config/agents.yaml
-✓ config/scenarios.yaml
-✓ scripts/utilities/es_client.py
-✓ scripts/utilities/test_connectivity.py
-✓ scripts/utilities/setup_elasticsearch.py
-✓ scripts/README.md
-✓ data/README.md
-✓ docs/README.md
-```
-
-## Next Steps (After Setup Works)
-
-1. I'll create data generation scripts
-2. I'll create data ingestion scripts
-3. I'll create the 7 agent implementations
-4. We'll test end-to-end scenarios
-
-## Need Help?
-
-Contact: Chintan Rami
-Demo Date: Feb 11, 2026 @ 2:00 PM AEDT
+**Python 3.13 issues** — see [PYTHON313_FIX.md](PYTHON313_FIX.md).

@@ -1,114 +1,151 @@
-# Elastic Agentic RCA Demo - Setup Instructions
+# Setup Instructions
 
-## IMPORTANT: Download All Files First!
+Full reference for configuring the demo environment from scratch.
 
-I've created all the project files, but they need to be downloaded to your Mac.
+---
 
-### Step 1: Download All Files
+## Requirements
 
-Download all the files I'm providing below and save them to:
-`/path/to/elastic-agentic-rca-demo/`
+| Requirement | Version |
+|---|---|
+| Python | 3.11 or 3.12 (see PYTHON313_FIX.md for 3.13) |
+| Elasticsearch | 9.2+ |
+| Kibana | 9.2+ |
+| ELSER model | Deployed on your cluster |
 
-### Step 2: Create Directory Structure
+---
 
-In Terminal, run:
+## Environment Configuration
 
-```bash
-cd /path/to/elastic-agentic-rca-demo
-
-# Create directories
-mkdir -p config scripts/utilities scripts/data_generation scripts/data_ingestion
-mkdir -p data/synthetic/{incidents,changes,problems,logs,traces,comms,knowledge,code}
-mkdir -p data/{raw,processed}
-mkdir -p agents/{orchestrator,tickets_changes,comms,observability,correlation_rca,pir_generator,reporting}
-mkdir -p elastic kibana docs tests logs outputs/{pir_documents,reports} notebooks
-
-# Create __init__.py files
-touch scripts/__init__.py scripts/utilities/__init__.py
-touch scripts/data_generation/__init__.py scripts/data_ingestion/__init__.py
-touch agents/__init__.py
-```
-
-### Step 3: Place Downloaded Files
-
-Put the downloaded files in these locations:
-
-```
-/path/to/elastic-agentic-rca-demo/
-├── requirements.txt          (download this)
-├── .env                      (download this)
-├── .gitignore                (download this)
-├── setup.sh                  (download this)  
-├── test_setup.sh             (download this)
-├── QUICKSTART.md             (download this)
-├── config/
-│   ├── elastic.yaml          (download this)
-│   ├── agents.yaml           (download this)
-│   └── scenarios.yaml        (download this)
-└── scripts/utilities/
-    ├── __init__.py
-    ├── es_client.py          (download this)
-    ├── test_connectivity.py  (download this)
-    └── setup_elasticsearch.py (download this)
-```
-
-### Step 4: Make Scripts Executable
+Copy the template and fill in your values:
 
 ```bash
-cd /path/to/elastic-agentic-rca-demo
-chmod +x setup.sh test_setup.sh
-chmod +x scripts/utilities/*.py
+cp .env.example .env
 ```
 
-### Step 5: Run Setup
+| Variable | Description |
+|---|---|
+| `ELASTIC_URL` | Your Elasticsearch endpoint |
+| `ELASTIC_USERNAME` | Cluster username (default: `elastic`) |
+| `ELASTIC_PASSWORD` | Cluster password |
+| `ELASTIC_API_KEY` | Alternative to username/password |
+| `KIBANA_URL` | Your Kibana endpoint |
+| `ELSER_MODEL_ID` | ELSER model ID (default: `.elser_model_2_linux-x86_64`) |
+
+---
+
+## Installation
 
 ```bash
-./test_setup.sh
-```
-
-This will:
-- Create virtual environment
-- Install dependencies
-- Test Elasticsearch connection
-
-### Step 6: Create Indices
-
-```bash
+python3 -m venv venv
 source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+For a minimal install (fewer dependencies):
+```bash
+pip install -r requirements-minimal.txt
+```
+
+---
+
+## Elasticsearch Setup
+
+### Test connectivity first
+```bash
+python scripts/utilities/test_connectivity.py
+```
+
+### Create all indices and mappings
+```bash
 python scripts/utilities/setup_elasticsearch.py
 ```
 
-## Files You Need to Download
+This creates the following indices with correct field mappings:
 
-I'll provide these files for download:
+| Index | Contains |
+|---|---|
+| `incidents-servicenow` | Incident records |
+| `changes-servicenow` | Change and deployment records |
+| `logs-application` | Application error logs |
+| `logs-infrastructure` | Infrastructure and GC logs |
+| `traces-apm` | Distributed APM traces |
+| `comms-teams` | Microsoft Teams messages |
+| `comms-email` | Email communications |
+| `knowledge-base` | KB articles (ELSER indexed) |
+| `rca-metrics` | JVM, CPU, connection pool metrics |
+| `rca-alerts` | Kibana alert records |
 
-### Core Files (6 files)
-1. requirements.txt
-2. .env
-3. .gitignore  
-4. setup.sh
-5. test_setup.sh
-6. QUICKSTART.md
+---
 
-### Config Files (3 files)
-7. config/elastic.yaml
-8. config/agents.yaml
-9. config/scenarios.yaml
+## Data Ingestion
 
-### Python Scripts (3 files)
-10. scripts/utilities/es_client.py
-11. scripts/utilities/test_connectivity.py
-12. scripts/utilities/setup_elasticsearch.py
+Synthetic data for all 3 scenarios is pre-generated in `data/synthetic/`. Ingest it with:
 
-## After Setup Works
+```bash
+source venv/bin/activate
+python scripts/data_ingestion/ingest_all_data.py
+```
 
-Once you can successfully run test_connectivity.py and setup_elasticsearch.py, I'll create:
-- Data generation scripts
-- Data ingestion scripts
-- All 7 AI agents
-- Kibana dashboards
-- Demo runner
+To ingest individual scenarios:
+```bash
+python scripts/data_ingestion/ingest_scenario2_data.py   # Memory leak
+python scripts/data_ingestion/ingest_scenario3_data.py   # Cascading timeout
+```
 
-## Troubleshooting
+---
 
-If files don't download properly, let me know and I'll provide them in a different format.
+## Kibana Configuration
+
+After ingestion, set up Kibana to explore the data:
+
+1. **Discover → Data Views → Create data view**
+   - Index pattern: `rca-*`
+   - Time field: `@timestamp`
+
+2. **Verify each scenario loads** (see [QUICKSTART.md](QUICKSTART.md) for verification queries)
+
+---
+
+## Elastic Workflow Setup
+
+The `rca_agent` is triggered via an Elastic Workflow. To configure:
+
+1. Go to **Kibana → Workflows**
+2. Import or create a workflow using the definition in `config/rca_workflow.yaml`
+3. Configure the agent with system instructions from `config/agents.yaml`
+4. Set up the 3 ES|QL tools defined in `config/agents.yaml`
+
+### Alert-Driven Trigger (Scenario 2)
+
+Create a Kibana alerting rule:
+- **Index:** `rca-metrics`
+- **Condition:** `avg(heap_percent) > 85` over last 5 minutes
+- **Action:** Trigger the RCA workflow with the alert context
+
+---
+
+## ServiceNow Integration (Optional)
+
+Scenario 2 and 3 workflows create ServiceNow incidents via Pipedream. To enable:
+
+1. Set up a Pipedream workflow that accepts a POST request and creates a ServiceNow incident
+2. Update the webhook URL in `config/rca_workflow.yaml`
+
+This step is optional — the RCA analysis runs fully without it.
+
+---
+
+## Verify Everything Works
+
+```bash
+# 1. Connectivity
+python scripts/utilities/test_connectivity.py
+
+# 2. Document counts
+# In Kibana Discover with index pattern rca-*:
+# incident_id:"INC0012345"  → ~156 docs  (Scenario 1)
+# incident_id:"INC0023456"  → ~180 docs  (Scenario 2)
+# incident_id:"INC0034567"  → ~228 docs  (Scenario 3)
+```

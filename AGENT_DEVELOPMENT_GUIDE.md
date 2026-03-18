@@ -1,304 +1,138 @@
-# Elastic AgenticAI RCA System - Development Guide
+# Agent Development Guide
 
-## 🎯 What We're Building
-
-**Complete automated RCA system using Elastic 9.3 AgenticAI + Workflow**
+Reference for understanding, configuring, and extending the `rca_agent` and its ES|QL tools.
 
 ---
 
-## 📦 Phase 1: AGENT 1 - Data Retriever (✅ READY TO TEST)
+## Overview
 
-### What It Does
-Pure tool-based agent that queries Elasticsearch for all incident-related data.
-
-**NO LLM** - just intelligent queries using:
-- Elasticsearch Query API
-- Time range calculations
-- Multi-index searches
-
-### Retrieves
-1. Incident record from `rca-incidents`
-2. Related changes from `rca-changes` (by app_id + time window)
-3. Application logs from `rca-logs-app` (errors during incident)
-4. Infrastructure logs from `rca-logs-infra` (system metrics)
-5. APM traces from `rca-traces` (slow transactions)
-6. Teams messages from `rca-comms-teams` (investigation)
-7. Emails from `rca-comms-email` (alerts)
-
-### Time Window Logic
-```
-Start: 24 hours BEFORE incident creation
-End: Incident resolution time (or +6 hours if ongoing)
-```
-
-This captures:
-- ✅ Changes that happened before incident
-- ✅ All errors during incident
-- ✅ Resolution activities
-- ✅ Human investigation (Teams/Email)
+The demo uses a single `rca_agent` built on Elastic AgenticAI. It is backed by Claude Sonnet 4.5 and equipped with 3 specialised ES|QL tools — one per scenario type. The agent adapts its analysis approach based on the incident it receives.
 
 ---
 
-## 🧪 Test Agent 1 NOW
+## Agent Configuration
 
-### Step 1: Download Files
+Configured in `config/agents.yaml`.
 
-Download these 3 files (above):
-1. `agents/data_retriever/agent.py`
-2. `agents/data_retriever/__init__.py`
-3. `config/rca_workflow.yaml` (workflow definition for reference)
+| Parameter | Value |
+|---|---|
+| Agent name | `rca_agent` |
+| LLM | Claude Sonnet 4.5 |
+| Max iterations | 10 |
+| Output format | PIR document (Executive Summary, Timeline, 5 Whys, Impact, Prevention) |
 
-Place in:
-```
-/path/to/elastic-agentic-rca-demo/
-├── agents/
-│   └── data_retriever/
-│       ├── __init__.py
-│       └── agent.py
-└── config/
-    └── rca_workflow.yaml
-```
+---
 
-### Step 2: Make Executable
+## ES|QL Tools
 
-```bash
-cd /path/to/elastic-agentic-rca-demo
-chmod +x agents/data_retriever/agent.py
-```
+### Tool 1: `rca_inc_change_logs_infra_traces`
+Used for **Scenario 1** (manual RCA — DB connection pool).
 
-### Step 3: Run Agent 1
+Retrieves across: `incidents-servicenow`, `changes-servicenow`, `logs-application`, `logs-infrastructure`, `traces-apm`, `comms-teams`, `comms-email`
 
-```bash
-source venv/bin/activate
-python agents/data_retriever/agent.py --incident INC0012345
-```
+**Input parameter:** `incident_id` (string)
 
-### Expected Output
-
-```
-🤖 Agent 1: Data Retriever
-Retrieving data for INC0012345...
-
-⠋ Retrieving incident record...
-  ✓ Found incident: CustomerPortal API returning 500 errors - connection...
-  ✓ Time window: 2026-02-04 08:00 AEDT → 2026-02-04 11:00 AEDT
-  ✓ Found 2 change(s)
-  ✓ Found 268 application log(s)
-  ✓ Found 23 infrastructure log(s)
-  ✓ Found 231 trace(s)
-  ✓ Found 8 communication(s)
-
-✓ Data retrieval complete
-Total documents: 533
-
-📊 Summary:
-  Incident: INC0012345
-  Application: APP-2847
-  Severity: P1
-  Changes found: 2
-  Total logs: 291
-  Traces: 231
-  Communications: 8
-
-✓ Agent 1 execution successful!
+**Sample ES|QL:**
+```sql
+FROM incidents-servicenow, changes-servicenow, logs-application, traces-apm
+| WHERE incident_id == ?incident_id
+| SORT @timestamp ASC
+| LIMIT 500
 ```
 
 ---
 
-## 🏗️ Complete Architecture
+### Tool 2: `memory_leak_data_retriever`
+Used for **Scenario 2** (alert-driven — JVM memory leak).
 
-### Workflow (Elastic Orchestration)
-```
-Input: incident_id = "INC0012345"
-  ↓
-┌─────────────────────────────────────┐
-│  STEP 1: Data Retrieval             │
-│  Agent: DataRetrieverAgent          │
-│  Type: Tool-based (no LLM)          │
-│  Time: ~2 minutes                   │
-└─────────────────────────────────────┘
-  ↓ passes: incident_data
-┌─────────────────────────────────────┐
-│  STEP 2: Temporal Correlation       │
-│  Agent: CorrelationAgent            │
-│  Type: LLM + Tools                  │
-│  LLM: Claude Sonnet 4               │
-│  Time: ~1 minute                    │
-└─────────────────────────────────────┘
-  ↓ passes: correlation_results
-┌─────────────────────────────────────┐
-│  STEP 3: RCA Generation             │
-│  Agent: RCAGeneratorAgent           │
-│  Type: LLM + RAG (ELSER)            │
-│  LLM: Claude Sonnet 4               │
-│  Time: ~1.5 minutes                 │
-└─────────────────────────────────────┘
-  ↓ passes: rca_analysis
-┌─────────────────────────────────────┐
-│  STEP 4: PIR Generation             │
-│  Agent: PIRGeneratorAgent           │
-│  Type: LLM-based                    │
-│  LLM: Claude Sonnet 4               │
-│  Time: ~1 minute                    │
-└─────────────────────────────────────┘
-  ↓
-Output: Complete RCA + PIR document
-Total time: ~5-6 minutes
+Retrieves across: `rca-metrics`, `logs-infrastructure`, `logs-application`, `changes-servicenow`, `rca-alerts`
+
+**Input parameter:** `alert_id` (string)
+
+**Sample ES|QL:**
+```sql
+FROM rca-metrics, logs-infrastructure, logs-application
+| WHERE app_id == ?app_id
+  AND @timestamp >= NOW() - 24h
+| SORT @timestamp ASC
+| LIMIT 500
 ```
 
 ---
 
-## 📋 Implementation Checklist
+### Tool 3: `distributed_system_analyzer`
+Used for **Scenario 3** (cascading timeout across multiple services).
 
-### ✅ Phase 1 (COMPLETED)
-- [x] Agent 1: Data Retriever (tool-based)
-- [x] Workflow definition (YAML)
-- [x] Test script
-- [x] Documentation
+Retrieves across: `rca-metrics`, `logs-application`, `traces-apm`, `comms-teams`, `incidents-servicenow`, `rca-alerts`
 
-### ⏳ Phase 2 (NEXT - 3-4 hours)
-- [ ] Agent 2: Correlation Agent (LLM + tools)
-  - Temporal pattern analysis
-  - Claude Sonnet 4 reasoning
-  - Statistical tools
+**Input parameter:** `incident_id` (string)
 
-### ⏳ Phase 3 (4-5 hours)
-- [ ] Agent 3: RCA Generator (LLM + RAG)
-  - 5 Whys methodology
-  - ELSER semantic search
-  - Evidence linking
-
-### ⏳ Phase 4 (2-3 hours)
-- [ ] Agent 4: PIR Generator (LLM-based)
-  - Document formatting
-  - Professional output
-
-### ⏳ Phase 5 (2-3 hours)
-- [ ] Workflow Runner
-  - Orchestrates all agents
-  - Manages data flow
-  - Error handling
-
-### ⏳ Phase 6 (2-3 hours)
-- [ ] Testing & Polish
-- [ ] Demo script
-- [ ] Kibana dashboards
-
----
-
-## 🎯 Agent 1 Output Structure
-
-```json
-{
-  "incident": {
-    "incident_id": "INC0012345",
-    "app_id": "APP-2847",
-    "severity": "P1",
-    "created_at": "2026-02-04T09:00:00+11:00",
-    "resolved_at": "2026-02-04T11:00:00+11:00",
-    "description": "CustomerPortal API returning 500 errors...",
-    "resolution_time_minutes": 120
-  },
-  "time_window": {
-    "start": "2026-02-04T08:00:00+11:00",
-    "end": "2026-02-04T11:00:00+11:00",
-    "duration_hours": 2.0
-  },
-  "changes": [
-    {
-      "change_id": "CHG0089234",
-      "app_id": "APP-2847",
-      "implemented_at": "2026-02-04T08:00:00+11:00",
-      "description": "Deploy v2.3.1 - traffic optimization"
-    },
-    {
-      "change_id": "CHG0089235",
-      "app_id": "APP-2847",
-      "implemented_at": "2026-02-04T10:30:00+11:00",
-      "description": "Update connection pool max size to 200"
-    }
-  ],
-  "logs": {
-    "application": [ /* 268 logs */ ],
-    "infrastructure": [ /* 23 logs */ ]
-  },
-  "traces": [ /* 231 traces */ ],
-  "communications": {
-    "teams": [ /* 6 messages */ ],
-    "emails": [ /* 2 emails */ ],
-    "teams_count": 6,
-    "email_count": 2
-  },
-  "metadata": {
-    "total_documents": 533,
-    "retrieval_time": "2026-02-04T13:55:00+11:00"
-  }
-}
+**Sample ES|QL:**
+```sql
+FROM rca-metrics, logs-application, traces-apm, comms-teams
+| WHERE incident_id == ?incident_id
+   OR app_id IN ("APP-9123", "APP-5521", "APP-7654")
+| SORT @timestamp ASC
+| LIMIT 500
 ```
 
-This structured data feeds into Agent 2 (Correlation).
+---
+
+## Agent System Instructions
+
+The agent's system instructions (in `config/agents.yaml`) define its reasoning approach:
+
+1. **Retrieve** all relevant data using the appropriate ES|QL tool
+2. **Correlate** — find temporal relationships between changes, deployments, and error spikes
+3. **Trace** — for distributed failures, trace backwards from symptoms to root cause
+4. **Analyse** — apply 5 Whys methodology
+5. **Generate** — produce a structured PIR document
+
+For distributed failures specifically, the agent is instructed to:
+- Identify all affected services
+- Build a service dependency map
+- Determine which service degraded first (earliest timestamp)
+- Check for external dependency failures (third-party APIs, databases)
 
 ---
 
-## 🔍 What Agent 2 Will Do (Next)
+## Extending the Agent
 
-**Correlation Agent** will take Agent 1's output and:
+### Adding a new ES|QL tool
 
-1. **Temporal Analysis:**
-   - Calculate time delta: Change → First Error
-   - Identify error spike pattern
-   - Determine correlation strength (0-1)
+1. Define the tool in `config/agents.yaml` under `tools:`
+2. Specify the ES|QL query, input parameters, and description
+3. Register the tool in your Elastic AI Assistant configuration
+4. Reference the tool name in the agent's system instructions
 
-2. **LLM Reasoning:**
-   - "Does the timing suggest causation?"
-   - "What's the evidence strength?"
-   - "Are there other contributing factors?"
+### Adding a new scenario
 
-3. **Output:**
-   ```json
-   {
-     "temporal_correlation": {
-       "change_to_first_error": "30 minutes",
-       "error_rate_progression": [0, 5, 45, 38, 0],
-       "correlation_strength": 0.95,
-       "confidence": "HIGH"
-     },
-     "key_events": [
-       {
-         "time": "08:00",
-         "event": "Deployment v2.3.1",
-         "type": "change"
-       },
-       {
-         "time": "08:30",
-         "event": "First connection errors",
-         "type": "error"
-       }
-     ]
-   }
-   ```
+1. Generate synthetic data (see [DATA_GENERATION_GUIDE.md](DATA_GENERATION_GUIDE.md))
+2. Ingest data into the appropriate indices
+3. Create or reuse an ES|QL tool that covers the new index pattern
+4. Add scenario parameters to `config/scenarios.yaml`
+5. Create a corresponding Elastic Workflow in Kibana
+
+### Modifying the PIR output format
+
+The output structure is defined in the agent's system instructions in `config/agents.yaml`. Modify the `output_format` section to change section headings, add new fields, or change the document structure.
 
 ---
 
-## 🚀 Next Steps
+## Data Flow
 
-1. **Test Agent 1 now** - Verify it works with your data
-2. **Tell me the output** - Confirm it retrieves all 533 documents
-3. **I'll build Agent 2** - Correlation with LLM reasoning
-4. **Then Agent 3 & 4** - Complete the workflow
-
-We're building this step-by-step so you can test each component!
-
----
-
-## ⏰ Timeline
-
-- **Now:** Test Agent 1 ✅
-- **Tonight (4 hours):** Build Agents 2, 3, 4
-- **Tomorrow:** Workflow runner + testing
-- **Feb 6-10:** Polish + dashboards
-- **Feb 11:** 🎯 DEMO
-
----
-
-**Run Agent 1 now and show me what you get!** 🚀
+```
+Trigger (manual or alert)
+        ↓
+Elastic Workflow activates rca_agent
+        ↓
+Agent selects appropriate ES|QL tool based on incident type
+        ↓
+Tool queries Elasticsearch (returns structured JSON)
+        ↓
+Agent reasons over results (Claude Sonnet 4.5)
+        ↓
+Agent generates PIR document
+        ↓
+Workflow posts to ServiceNow (via Pipedream) + logs to knowledge base
+```
